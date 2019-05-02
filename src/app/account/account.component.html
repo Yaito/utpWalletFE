@@ -1,0 +1,20 @@
+<div class='outer-container'>
+  <div class="container">
+
+    <div class='profile-pic'>
+      <div class="circle">{{ initials }}</div>
+      <span class="name" style="display: block">{{ fullname }} </span>
+    </div>
+
+    <div class="profile-info">
+      <ul>
+        <li *ngFor='let info of accDetails'>
+          {{ info }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="profile-balance">$111.00</div>
+
+  </div>
+</div>
