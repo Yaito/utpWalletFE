@@ -58,4 +58,8 @@
     padding: 15px;
     text-align: center;
     font-size: 12px;
+    &:hover {
+        color: blue;
+        cursor: pointer;
+    }
 }

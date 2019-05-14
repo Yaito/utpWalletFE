@@ -1,3 +1,38 @@
-<p>
-  about-us works!
-</p>
+<div class="modal-header">
+    <h4 class="modal-title"><i class="fas fa-at"></i> Acerca de...</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p align='justify'>{{ aboutMessage }} </p>
+    <div class='profile-body'>
+      <div class="author1">
+        <div class="card" style="width: 18rem;">
+          <img src="assets/Logo_RAW.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Luis Yao</h5>
+            <p class="card-text">Estudiante de Ingeniería de Sistemas y Computación, Ingeniero Pasante de Transmisión en Huawei Enterprise.</p>
+            <a href="https://www.linkedin.com/in/luisyaoyang/" target="_blank" class="btn btn-primary btn-lk"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/notLwiz" target="_blank" class="btn btn-primary btn-tw"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        </div>
+
+      <div class="author2">
+          <div class="card" style="width: 18rem;">
+              <img src="assets/Logo_RAW.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Roderick Mastrolinardo</h5>
+                <p class="card-text">Estudiante de Ingeniería de Sistemas y Computación, en proceso de Cisco Certified Network Associate (CCNA).</p>
+                <a href="https://www.instagram.com/rod_mastroo/" target="_blank" class="btn btn-danger btn-ins"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/RodMastro" target="_blank" class="btn btn-primary btn-tw"><i class="fab fa-twitter"></i></a>
+              </div>
+            </div>            
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Cerrar</button>
+  </div>

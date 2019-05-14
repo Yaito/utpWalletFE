@@ -14,7 +14,7 @@ export class AuthService {
       username,
       password
     }).subscribe(data => {
-      console.log(data, 'what the API returned')
-    })
+      console.log(data, 'what the API returned');
+    });
   }
 }

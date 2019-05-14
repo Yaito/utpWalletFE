@@ -1,18 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RouterModule } from '@angular/router';
 import { AccountComponent } from './account/account.component';
 import { TransactionOpComponent } from './transaction-op/transaction-op.component';
 import { SecurityOpComponent } from './security-op/security-op.component';
 import { HomeComponent } from './home/home.component';
-import { AuthService } from './auth.service';
-import { HttpClientModule } from '@angular/common/http';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { AuthService } from './auth.service';
+import { HelpComponent } from './help/help.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +27,10 @@ import { AboutUsComponent } from './about-us/about-us.component';
     TransactionOpComponent,
     SecurityOpComponent,
     HomeComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    TransactionsComponent,
+    NavbarComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +58,12 @@ import { AboutUsComponent } from './about-us/about-us.component';
         path: '',
         component: HomeComponent
       }
-    ])
+    ]),
+    NgbModalModule
+  ],
+  entryComponents: [
+    AboutUsComponent,
+    HelpComponent
   ],
   providers: [
     AuthService

@@ -1,54 +1,38 @@
-<!-- 
-<form (submit)="loginUser($event)">
-  <input [(ngModel)]='username' type="text" placeholder="Nombre de Usuario" name='username'>
-  <br>
-  <input [(ngModel)]='password' type="password" placeholder="Contraseña" name='password'>
-  <br>
-  <input type="submit" value="Entrar">
-</form> -->
+<div class="outer-container">
+  <div class="container">
 
-<head>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-</head>
+    <div class='logo-container'>
+      <img class='logo' [src]='logo' alt='logo' />
+    </div>
 
-<body>
-  <div class="outer-container">
-    <div class="container">
-      
-      <div class='logo-container'>
-        <img class='logo' [src]='logo' alt='logo'/>
+    <h1 class='title'>Iniciar Sesión</h1>
+    <form class='form-container' (submit)="loginUser($event)">
+
+      <div class="input-group flex-nowrap">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="addon-wrapping"><i class="fas fa-user"></i></span>
+        </div>
+        <input [(ngModel)]='username' type="text" class="form-control" placeholder="Nombre de Usuario"
+          aria-label="Username" aria-describedby="addon-wrapping" name='username'>
       </div>
 
-      <h1 class='title'>Iniciar Sesión</h1>
-      <form class='form-container' (submit)="loginUser($event)">
-
-        <div class="input-group flex-nowrap">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="addon-wrapping"><i class="fas fa-user"></i></span>
-          </div>
-          <input [(ngModel)]='username' type="text" class="form-control" placeholder="Nombre de Usuario"
-            aria-label="Username" aria-describedby="addon-wrapping" name='username'>
+      <div class="input-group flex-nowrap">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="addon-wrapping"><i class="fas fa-key"></i></span>
         </div>
+        <input [(ngModel)]='password' type="password" class="form-control" placeholder="Contraseña"
+          aria-label="Password" aria-describedby="addon-wrapping" name='password'>
+      </div>
 
-        <div class="input-group flex-nowrap">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="addon-wrapping"><i class="fas fa-key"></i></span>
-          </div>
-          <input [(ngModel)]='password' type="password" class="form-control" placeholder="Contraseña"
-            aria-label="Password" aria-describedby="addon-wrapping" name='password'>
-        </div>
+      <div class="input-btn">
+        <input class='btn btn-primary' type="submit" value="Entrar">
+        <button class="btn btn-info" (click)="openHP()">Ayuda</button>
+      </div>
 
-        <div class="input-btn">
-          <input class='btn btn-primary' type="submit" value="Entrar">
-          <button class="btn btn-info">Ayuda</button>
-        </div>
-
-      </form>
-    </div>
+    </form>
   </div>
+</div>
 
-  <div class='about-us'>
-    <span>Acerca de...</span>
-  </div>
-</body>
+<div class='about-us'>
+  <a class="about-us" (click)="openUS()">Acerca de...</a>
+</div>

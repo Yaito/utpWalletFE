@@ -1,20 +1,39 @@
+<app-navbar></app-navbar>
 <div class='outer-container'>
+
   <div class="container">
+    <div class="row out-row">
 
-    <div class='profile-pic'>
-      <div class="circle">{{ initials }}</div>
-      <span class="name" style="display: block">{{ fullname }} </span>
+      <div class="col-4 profile-col">
+        <div class='profile-pic'>
+          <div class="circle">{{ initials }}</div>
+          <span class="name" style="display: block">{{ userProfile.fname }} {{ userProfile.lname }}</span>
+        </div>
+      </div>
+
+      <div class="col-4 info-col">
+
+        <div class="row info-row">
+          <div class="profile-info">
+            <ul class="list-group">
+                <li class="list-group-item">ID de Cuenta: {{ userProfile.accountID }}</li>
+                <li class="list-group-item">NIP: {{ userProfile.personalID }}</li>
+                <li class="list-group-item">Facultad: {{ userProfile.faculty }}</li>
+                <li class="list-group-item">Carrera: {{ userProfile.career }}</li>
+              </ul>
+          </div>
+        </div>
+
+        <div class="row balance-row">
+          <div class="profile-balance">{{ userProfile.balance | currency }}</div>
+        </div>
+
+      </div>
+
     </div>
-
-    <div class="profile-info">
-      <ul>
-        <li *ngFor='let info of accDetails'>
-          {{ info }}
-        </li>
-      </ul>
-    </div>
-
-    <div class="profile-balance">$111.00</div>
 
   </div>
+
+  <app-transactions></app-transactions>
+
 </div>

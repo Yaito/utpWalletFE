@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AccountDetail } from 'src/assets/models';
+import { UserinfoService } from 'src/app/userinfo.service';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -7,26 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
-  fullname = 'Roderick Mastrolinardo';
   initials: string;
+  userProfile: AccountDetail;
 
-  accDetails =
-    ['Facultad de Ingeniería Sistemas Computacionales',
-      '8-888-9999',
-      'Licenciatura en Ingeniería de Sistemas y Computación',
-      'rodmastro@gmail.com'];
-
-  constructor() {
+  constructor(private userInfoServices: UserinfoService) {
   }
 
   ngOnInit() {
-    this.getInitials(this.fullname);
+    this.userInfoServices.getInitials()
+    .subscribe(res => {
+      this.initials = res;
+      // console.log(res);
+    });
+
+    this.userInfoServices.getUser()
+    .subscribe(res => {
+      this.userProfile = res;
+      // console.log(res);
+    });
+
+    // this.userInfoServices.testGet()
+    // .subscribe(res => {
+    //   // this.userProfile = res;
+    //   console.log(res);
+    // });
   }
 
-  getInitials(fullname) {
-    let match = fullname.match(/\b(\w)/g);
-    this.initials = match[0] + match[1];
-    return this.initials;
-  }
+
 
 }
