@@ -11,11 +11,7 @@ export class NavbarComponent implements OnInit {
   constructor(private userInfoServices: UserinfoService) { }
 
   ngOnInit() {
-    this.userInfoServices.getInitials()
-    .subscribe(res => {
-      this.initials = res;
-      // console.log(res);
-    });
+
   }
 
 }

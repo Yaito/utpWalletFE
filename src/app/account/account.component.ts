@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountDetail } from 'src/assets/models';
+import { User } from 'src/assets/models';
 import { UserinfoService } from 'src/app/userinfo.service';
 @Component({
   selector: 'app-account',
@@ -9,31 +9,33 @@ import { UserinfoService } from 'src/app/userinfo.service';
 export class AccountComponent implements OnInit {
 
   initials: string;
-  userProfile: AccountDetail;
+  userProfile: User;
 
   constructor(private userInfoServices: UserinfoService) {
   }
 
   ngOnInit() {
-    this.userInfoServices.getInitials()
-    .subscribe(res => {
-      this.initials = res;
-      // console.log(res);
-    });
-
     this.userInfoServices.getUser()
-    .subscribe(res => {
-      this.userProfile = res;
-      // console.log(res);
-    });
+      .subscribe(res => {
+        this.userProfile = res;
 
-    // this.userInfoServices.testGet()
-    // .subscribe(res => {
-    //   // this.userProfile = res;
-    //   console.log(res);
-    // });
+        this.userInfoServices.getInitials(this.userProfile.first_name, this.userProfile.last_name)
+        .subscribe(resIni => {
+          this.initials = resIni;
+          console.log(resIni);
+        });
+
+        console.log(res);
+        console.log(JSON.stringify(res));
+        console.log(typeof (this.userProfile));
+      });
+
+    // this.userInfoServices.getInitials(this.userProfile.first_name, this.userProfile.last_name)
+    //   .subscribe(resIni => {
+    //     this.initials = resIni;
+    //     console.log(resIni);
+    //   });
+
   }
-
-
 
 }

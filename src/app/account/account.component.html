@@ -1,13 +1,13 @@
 <app-navbar></app-navbar>
 <div class='outer-container'>
 
-  <div class="container">
+  <div class="container" *ngIf="userProfile">
     <div class="row out-row">
 
       <div class="col-4 profile-col">
         <div class='profile-pic'>
-          <div class="circle">{{ initials }}</div>
-          <span class="name" style="display: block">{{ userProfile.fname }} {{ userProfile.lname }}</span>
+          <div class="circle">{{ initials | uppercase }}</div>
+          <span class="name" style="display: block">{{ userProfile.first_name | titlecase }} {{ userProfile.last_name | titlecase }}</span>
         </div>
       </div>
 
@@ -16,16 +16,16 @@
         <div class="row info-row">
           <div class="profile-info">
             <ul class="list-group">
-                <li class="list-group-item">ID de Cuenta: {{ userProfile.accountID }}</li>
-                <li class="list-group-item">NIP: {{ userProfile.personalID }}</li>
-                <li class="list-group-item">Facultad: {{ userProfile.faculty }}</li>
-                <li class="list-group-item">Carrera: {{ userProfile.career }}</li>
+                <li class="list-group-item">ID de Cuenta: {{ userProfile.acc_ID }}</li>
+                <li class="list-group-item">NIP: {{ userProfile.personal_ID }}</li>
+                <li class="list-group-item">Facultad: {{ userProfile.account_faculty }}</li>
+                <li class="list-group-item">Carrera: {{ userProfile.account_career }}</li>
               </ul>
           </div>
         </div>
 
         <div class="row balance-row">
-          <div class="profile-balance">{{ userProfile.balance | currency }}</div>
+          <div class="profile-balance">{{ userProfile.acc_balance | currency }}</div>
         </div>
 
       </div>

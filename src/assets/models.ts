@@ -7,12 +7,12 @@ export interface Transaction {
         credit: number;
 }
 
-export interface AccountDetail {
-        accountID: number;
-        fname: string;
-        lname: string;
-        personalID: string;
-        faculty: string;
-        career: string;
-        balance: number;
+export interface User {
+        acc_ID: number;
+        first_name: string;
+        last_name: string;
+        personal_ID: string;
+        account_faculty: string;
+        account_career: string;
+        acc_balance: number;
 }
