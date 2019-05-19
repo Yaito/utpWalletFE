@@ -13,11 +13,12 @@ export class UserinfoService {
 
   getInitials(firstName, lastName) {
     const initials = firstName[0] + lastName[0];
-    console.log(initials);
+    // console.log(initials);
     return of(initials);
   }
 
-  getUser(): Observable<User> {
-    return this.httpService.get<User>(`${this.apiURL}/students/1`);
+  getUser(cardID): Observable<User> {
+    return this.httpService.get<User>(`${this.apiURL}/students/${cardID}`);
   }
+
 }

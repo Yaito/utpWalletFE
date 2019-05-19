@@ -10,12 +10,12 @@ export class AccountComponent implements OnInit {
 
   initials: string;
   userProfile: User;
-
+  cardID = 5;
   constructor(private userInfoServices: UserinfoService) {
   }
 
   ngOnInit() {
-    this.userInfoServices.getUser()
+    this.userInfoServices.getUser(this.cardID)
       .subscribe(res => {
         this.userProfile = res;
 

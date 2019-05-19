@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4 class="modal-title">Información</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row info-row">
+    <div class="profile-info">
+      <div class="circle">{{ initials | uppercase }}</div>
+      <ul class="list-group">
+        <li class="list-group-item">Nombre: {{ userProfile?.first_name | titlecase }}
+          {{ userProfile?.last_name | titlecase }}</li>
+        <li class="list-group-item">Cédula: {{ userProfile?.personal_ID }}</li>
+        <li class="list-group-item">Facultad: {{ userProfile?.account_faculty }}</li>
+        <li class="list-group-item">Carrera: {{ userProfile?.account_career }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Confirmar</button>
+</div>

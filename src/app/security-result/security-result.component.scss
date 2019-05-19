@@ -1,0 +1,25 @@
+.modal-body {
+    margin: auto;
+    padding-left: 20px;
+}
+
+.circle {
+    float: left;
+    // display: inline-block;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    font-size: 100px;
+    color: #ffffff;
+    line-height: 200px;
+    text-align: center;
+    background-color:rgb(196, 196, 196);
+    margin: 10px;
+}
+
+.list-group {
+    float:right;
+    // display: inline-block;
+    margin: 10px;
+
+}

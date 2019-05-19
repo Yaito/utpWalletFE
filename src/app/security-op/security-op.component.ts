@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SecurityResultComponent } from '../security-result/security-result.component';
 
 @Component({
   selector: 'app-security-op',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SecurityOpComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
+
+  }
+
+  showInfo() {
+    const modalRef = this.modalService.open(SecurityResultComponent, { size: 'lg' });
   }
 
 }

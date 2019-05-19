@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,13 +12,16 @@ import { AccountComponent } from './account/account.component';
 import { TransactionOpComponent } from './transaction-op/transaction-op.component';
 import { SecurityOpComponent } from './security-op/security-op.component';
 import { HomeComponent } from './home/home.component';
-import { AboutUsComponent } from './about-us/about-us.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { HelpComponent } from './help/help.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { SecurityResultComponent } from './security-result/security-result.component';
 
 import { AuthService } from './auth.service';
 import { UserinfoService } from './userinfo.service';
+import { AlertComponent } from './alert/alert.component';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { UserinfoService } from './userinfo.service';
     AboutUsComponent,
     TransactionsComponent,
     NavbarComponent,
-    HelpComponent
+    HelpComponent,
+    SecurityResultComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,8 @@ import { UserinfoService } from './userinfo.service';
   ],
   entryComponents: [
     AboutUsComponent,
-    HelpComponent
+    HelpComponent,
+    SecurityResultComponent
   ],
   providers: [
     AuthService,
