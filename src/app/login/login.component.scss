@@ -4,7 +4,7 @@
     padding: 10px;
     height: auto;
     width: 500px;
-    margin: 10% auto auto auto;
+    margin: 8% auto auto auto;
     position: relative;
     background-color:white;
 }
@@ -14,8 +14,13 @@
     padding: 0px 15px 0px 15px;
 }
 
-.form-container {
-    text-align: left;
+.form-group {
+    margin-bottom: 5px;
+}
+
+.action-buttons {
+    margin: auto;
+    text-align: center;
 }
 
 .logo-container {

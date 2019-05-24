@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
-import { AuthService } from '../auth.service';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AboutUsComponent } from '../about-us/about-us.component';
 import { HelpComponent } from '../help/help.component';
+
+import { AlertService } from '../alert.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +17,54 @@ import { HelpComponent } from '../help/help.component';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  loginForm: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
+
   logo = 'assets/Logo.png';
 
-  username;
-  password;
-
-  constructor(private Auth: AuthService, private modalService: NgbModal) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthService,
+    private alertService: AlertService,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+
+    // get return url from route parameters or default to '/'
+    console.log(this.route);
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  get f() { return this.loginForm.controls; }
+
+  onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.authenticationService.login(this.f.username.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate(['/account']);
+          // this.router.navigate([this.returnUrl]); // this is use to go back to previous page after login
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        });
   }
 
   openUS() {
@@ -31,10 +75,10 @@ export class LoginComponent implements OnInit {
     const modalRef = this.modalService.open(HelpComponent, { centered: true });
   }
 
-  loginUser() {
-    event.preventDefault();
-    this.Auth.getUserDetails(this.username, this.password);
-    console.log(this.username, this.password);
-  }
+  // loginUser() {
+  //   event.preventDefault();
+  //   this.Auth.login(this.username, this.password);
+  //   console.log(this.username, this.password);
+  // }
 
 }

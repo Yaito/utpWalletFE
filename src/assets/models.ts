@@ -16,3 +16,9 @@ export interface User {
         account_career: string;
         acc_balance: number;
 }
+
+export interface LogUser {
+        user_ID: number;
+        access_token: string;
+        refresh_token: string;
+}

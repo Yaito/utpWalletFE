@@ -28,12 +28,12 @@
   <div class="ml-auto mr-1 navbar-collapse flex-grow-0">
     <ul class="navbar-nav text-right">
       <li class="nav-item active">
-        <a class="btn btn-primary ml-auto mr-1" href="/account"><i class="fas fa-user"></i> Perfil</a>
+        <a class="btn btn-primary ml-auto mr-1" routerLink="/account"><i class="fas fa-user"></i> Perfil</a>
         
         <!-- <div class="circle ml-auto mr-1"><a>{{ initials }}</a></div> -->
       </li>
       <li class="nav-item active">
-        <a class="btn btn-danger ml-auto mr-1" href="/login">Salir</a>
+        <a class="btn btn-danger ml-auto mr-1" (click)="logout()">Salir</a>
       </li>
     </ul>
   </div>
