@@ -31,3 +31,10 @@ export interface Transactions {
         amount: number;
         date: Date;
 }
+
+export enum Role {
+        Student = 0,
+        Security = 1,
+        Operator = 2,
+        Admin = 3
+}
