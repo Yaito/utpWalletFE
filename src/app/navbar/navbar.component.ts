@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserinfoService } from 'src/app/userinfo.service';
+import { Observable } from 'rxjs';
 
 import { Router } from '@angular/router';
 
@@ -13,18 +13,21 @@ import { LogUser } from 'src/assets/models';
 })
 export class NavbarComponent implements OnInit {
   currentUser: LogUser;
+  currentUserSubscription: Subscription;
 
   constructor(
     private router: Router,
     private authenticationService: AuthService
-) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-}
+  ) {
+    this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
+  }
 
-logout() {
+  logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
-}
+  }
 
   ngOnInit() {
 

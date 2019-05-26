@@ -1,15 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from 'src/assets/models';
 import { Observable, of } from 'rxjs';
+import { Subscription } from 'rxjs';
 
+import { User, LogUser } from 'src/assets/models';
+import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
 export class UserinfoService {
   apiURL = 'https://utpwallet.herokuapp.com';
+  currentUser: LogUser;
+  currentUserSubscription: Subscription;
 
-  constructor(private httpService: HttpClient) { }
+  constructor(
+    private httpService: HttpClient,
+    private authenticationService: AuthService
+  ) {
+    this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
+
+  }
 
   getInitials(firstName, lastName) {
     const initials = firstName[0] + lastName[0];
@@ -18,7 +30,11 @@ export class UserinfoService {
   }
 
   getUser(cardID): Observable<User> {
-    return this.httpService.get<User>(`${this.apiURL}/students/${cardID}`);
+    if (this.currentUser.user_type !== 0) {
+      return this.httpService.get<User>(`${this.apiURL}/admins/${cardID}`);
+    } else {
+      return this.httpService.get<User>(`${this.apiURL}/students/${cardID}`);
+    }
   }
 
 }

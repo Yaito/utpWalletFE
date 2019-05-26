@@ -15,10 +15,19 @@ export interface User {
         account_faculty: string;
         account_career: string;
         acc_balance: number;
+        transactions: Transactions[];
 }
 
 export interface LogUser {
         user_ID: number;
+        user_type: number;
         access_token: string;
         refresh_token: string;
+}
+
+export interface Transactions {
+        user_ID: number;
+        trx_type: string;
+        amount: number;
+        date: Date;
 }

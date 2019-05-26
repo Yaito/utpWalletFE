@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
-import { LogUser } from 'src/assets/models';
-import { User } from 'src/assets/models';
+import { LogUser, User } from 'src/assets/models';
 import { UserinfoService } from 'src/app/userinfo.service';
 import { AuthService } from '../auth.service';
 @Component({
@@ -16,11 +16,11 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   initials: string;
   userProfile: User;
-  cardID = 5;
 
   constructor(
     private userInfoServices: UserinfoService,
-    private authenticationService: AuthService
+    private authenticationService: AuthService,
+    private spinner: NgxSpinnerService
   ) {
     this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
@@ -29,26 +29,21 @@ export class AccountComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.userInfoServices.getUser(this.currentUser.user_ID) // change param to LogUser ID
+    this.spinner.show()
+    this.userInfoServices.getUser(this.currentUser.user_ID)
       .subscribe(res => {
         this.userProfile = res;
 
         this.userInfoServices.getInitials(this.userProfile.first_name, this.userProfile.last_name)
           .subscribe(resIni => {
             this.initials = resIni;
-            console.log(resIni);
+            // console.log(resIni); // testing initial purpose
           });
-
-        console.log(res);
-        console.log(JSON.stringify(res));
-        console.log(typeof (this.userProfile));
+        this.spinner.hide();
+        console.log(res); // testing account details returned object
+        // console.log(JSON.stringify(res));
+        // console.log(typeof (this.userProfile));
       });
-
-    // this.userInfoServices.getInitials(this.userProfile.first_name, this.userProfile.last_name)
-    //   .subscribe(resIni => {
-    //     this.initials = resIni;
-    //     console.log(resIni);
-    //   });
 
   }
 

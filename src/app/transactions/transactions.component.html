@@ -1,22 +1,22 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">User</th>
-      <th scope="col">Type</th>
-      <th scope="col">Date</th>
-      <th scope="col">Debit</th>
-      <th scope="col">Credit</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor='let row of content'>
-      <td>{{row.id}}</td>
-      <td>{{row.user}}</td>
-      <td>{{row.type}}</td>
-      <td>{{row.date | date:'medium'}}</td>
-      <td>{{row.debit | currency }}</td>
-      <td>{{row.credit | currency }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+    <table class="table table-hover fixed_header">
+        <thead class="thead-dark">
+          <tr class="row">
+            <th class="col-1 d-flex justify-content-center" scope="col">ID</th>
+            <th class="col-2 d-flex justify-content-center" scope="col">Tipo</th>
+            <th class="col-3 d-flex justify-content-center" scope="col">Fecha</th>
+            <th class="col-3 d-flex justify-content-center" scope="col">Descripción</th>
+            <th class="col-3 d-flex justify-content-center" scope="col">Monto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row" *ngFor='let row of content'>
+            <td class="col-1 d-flex justify-content-center">{{ row.user_ID }}</td>
+            <td class="col-2 d-flex justify-content-center">{{ row.trx_type}}</td>
+            <td class="col-3 d-flex justify-content-center">{{ row.date | date:'medium' }} </td>
+            <td class="col-3 d-flex justify-content-center">{{ row.description }}</td>
+            <td class="col-3 d-flex justify-content-center">{{ row.amount | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

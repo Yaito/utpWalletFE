@@ -31,7 +31,7 @@ export class AuthService {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
         }
-        console.log(user.user_ID);  // testing and confirmation purpose
+        console.log(user);  // testing and confirmation purpose
         return user;
       }));
   }

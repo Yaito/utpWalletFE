@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AboutUsComponent } from '../about-us/about-us.component';
@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthService,
@@ -39,7 +40,6 @@ export class LoginComponent implements OnInit {
     });
 
     // get return url from route parameters or default to '/'
-    console.log(this.route);
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
@@ -54,14 +54,18 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
+    this.spinner.show();
+
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         data => {
+          this.spinner.hide();
           this.router.navigate(['/account']);
           // this.router.navigate([this.returnUrl]); // this is use to go back to previous page after login
         },
         error => {
+          this.spinner.hide();
           this.alertService.error(error);
           this.loading = false;
         });
@@ -74,11 +78,5 @@ export class LoginComponent implements OnInit {
   openHP() {
     const modalRef = this.modalService.open(HelpComponent, { centered: true });
   }
-
-  // loginUser() {
-  //   event.preventDefault();
-  //   this.Auth.login(this.username, this.password);
-  //   console.log(this.username, this.password);
-  // }
 
 }

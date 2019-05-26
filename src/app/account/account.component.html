@@ -12,7 +12,7 @@
 
       <div class="col-4 info-col">
 
-        <div class="row info-row">
+        <div *ngIf="currentUser.user_type == 0" class="row info-row">
           <div class="profile-info">
             <ul class="list-group">
                 <li class="list-group-item">ID de Cuenta: {{ userProfile.acc_ID }}</li>
@@ -22,6 +22,16 @@
               </ul>
           </div>
         </div>
+
+        <div *ngIf="currentUser.user_type !== 0" class="row info-row">
+            <div class="profile-info">
+              <ul class="list-group">
+                  <li class="list-group-item">ID de Cuenta: {{ userProfile.admin_ID }}</li>
+                  <li class="list-group-item">NIP: {{ userProfile.personal_ID }}</li>
+                  <li class="list-group-item">Tipo de Operador: {{ userProfile.user_type }}</li>
+                </ul>
+            </div>
+          </div>
 
         <div class="row balance-row">
           <div class="profile-balance">{{ userProfile.acc_balance | currency }}</div>

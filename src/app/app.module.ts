@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -68,7 +69,8 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
       //   component: HomeComponent
       // }
     ]),
-    NgbModalModule
+    NgbModalModule,
+    NgxSpinnerModule
   ],
   entryComponents: [
     AboutUsComponent,
@@ -76,6 +78,7 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
     SecurityResultComponent
   ],
   providers: [
+    AccountComponent,
     AuthService,
     UserinfoService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

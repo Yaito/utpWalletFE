@@ -14,10 +14,6 @@
     padding: 0px 15px 0px 15px;
 }
 
-.form-group {
-    margin-bottom: 5px;
-}
-
 .action-buttons {
     margin: auto;
     text-align: center;
@@ -43,11 +39,8 @@
 
 .title {
     font-size: 26px;
-    margin: 0px;
-}
+    margin-bottom: 5px;
 
-.input-group {
-    padding: 10px 0px 10px 0px;
 }
 
 .input-btn {
@@ -67,4 +60,10 @@
         color: blue;
         cursor: pointer;
     }
+}
+
+.form-group {
+    box-sizing: border-box;
+    padding: 5px 0px 5px 0px;
+    margin-bottom: 10px;
 }
