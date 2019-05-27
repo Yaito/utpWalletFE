@@ -30,7 +30,17 @@ export class UserinfoService {
   }
 
   getUser(cardID): Observable<User> {
-    if (this.currentUser.user_type !== 0) {
+    // for getting account own data and information
+      if (this.currentUser.user_type !== 0) {
+        return this.httpService.get<User>(`${this.apiURL}/admins/${cardID}`);
+      } else {
+        return this.httpService.get<User>(`${this.apiURL}/students/${cardID}`);
+      }
+  }
+
+  showUser(cardID, type): Observable<User> {
+    // for getting others account informacion
+    if (type > 0) {
       return this.httpService.get<User>(`${this.apiURL}/admins/${cardID}`);
     } else {
       return this.httpService.get<User>(`${this.apiURL}/students/${cardID}`);

@@ -11,11 +11,11 @@
         </thead>
         <tbody>
           <tr class="row" *ngFor='let row of content'>
-            <td class="col-1 d-flex justify-content-center">{{ row.user_ID }}</td>
-            <td class="col-2 d-flex justify-content-center">{{ row.trx_type}}</td>
-            <td class="col-3 d-flex justify-content-center">{{ row.date | date:'medium' }} </td>
-            <td class="col-3 d-flex justify-content-center">{{ row.description }}</td>
-            <td class="col-3 d-flex justify-content-center">{{ row.amount | currency }}</td>
+            <td class="col-1 d-flex justify-content-center id">{{ row.user_ID }}</td>
+            <td class="col-2 d-flex justify-content-center trx">{{ row.trx_type}}</td>
+            <td class="col-3 d-flex justify-content-center date">{{ row.date | date:'medium' }} </td>
+            <td class="col-3 d-flex justify-content-center description">{{ row.description }}</td>
+            <td class="col-3 d-flex justify-content-center amount">{{ row.amount | currency }}</td>
           </tr>
         </tbody>
       </table>

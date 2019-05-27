@@ -15,6 +15,7 @@ export interface User {
         account_faculty: string;
         account_career: string;
         acc_balance: number;
+        user_type: string;
         transactions: Transactions[];
 }
 

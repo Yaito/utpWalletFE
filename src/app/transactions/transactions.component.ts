@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { TransactionsService } from '../transactions.service';
-import { UserinfoService } from 'src/app/userinfo.service';
+// import { UserinfoService } from 'src/app/userinfo.service';
 import { AuthService } from '../auth.service';
 import { Transactions, LogUser } from 'src/assets/models';
 
@@ -22,7 +22,7 @@ export class TransactionsComponent implements OnInit {
   constructor(
     private transactionService: TransactionsService,
     private authenticationService: AuthService,
-    private userInfoServices: UserinfoService,
+    // private userInfoServices: UserinfoService,
     private spinner: NgxSpinnerService
   ) {
     this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {

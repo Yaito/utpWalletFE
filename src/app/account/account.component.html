@@ -1,4 +1,4 @@
-<div class='outer-container'>
+<div *ngIf="currentUser" class='outer-container'>
 
   <div class="container" *ngIf="userProfile">
     <div class="row out-row">
@@ -17,6 +17,7 @@
             <ul class="list-group">
                 <li class="list-group-item">ID de Cuenta: {{ userProfile.acc_ID }}</li>
                 <li class="list-group-item">NIP: {{ userProfile.personal_ID }}</li>
+                <li class="list-group-item">Tipo: {{ userProfile.user_type }}</li>
                 <li class="list-group-item">Facultad: {{ userProfile.account_faculty }}</li>
                 <li class="list-group-item">Carrera: {{ userProfile.account_career }}</li>
               </ul>

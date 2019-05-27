@@ -29,7 +29,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.spinner.show()
+    this.spinner.show();
     this.userInfoServices.getUser(this.currentUser.user_ID)
       .subscribe(res => {
         this.userProfile = res;

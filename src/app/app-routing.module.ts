@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { AccountComponent } from './account/account.component';
 import { TransactionOpComponent } from './transaction-op/transaction-op.component';
 import { SecurityOpComponent } from './security-op/security-op.component';
+import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './_auth-guard/auth.guard';
 import { Role } from '../assets/models';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
   { path: 'security', component: SecurityOpComponent, canActivate: [AuthGuard], data: { roles: [Role.Security]} },
   { path: 'transaction', component: TransactionOpComponent, canActivate: [AuthGuard], data: { roles: [Role.Operator]} },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin]} },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
