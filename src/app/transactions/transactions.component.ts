@@ -32,10 +32,10 @@ export class TransactionsComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    this.transactionService.getData(this.currentUser.user_ID) // change param to LogUser ID
+    this.transactionService.getData(this.currentUser.user_ID) // 
       .subscribe(res => {
         this.content = res.transactions;
-        // console.log(this.content); // testing transaction object
+        console.log(this.content); // testing transaction object
         this.spinner.hide();
       });
 

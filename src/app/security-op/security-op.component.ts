@@ -11,10 +11,7 @@ import { SecurityResultComponent } from '../security-result/security-result.comp
 })
 export class SecurityOpComponent implements OnInit {
 
-  public user = {
-    cardID: 1, // test id for security functions
-    userType: 0 // test type for security functions
-  };
+  @Input() cardID: number; // test id for security functions
 
   constructor(
     private modalService: NgbModal,
@@ -31,13 +28,13 @@ export class SecurityOpComponent implements OnInit {
 
   openModal() {
     const modalRef = this.modalService.open(SecurityResultComponent, { size: 'lg' });
-    modalRef.componentInstance.cardID = this.user.cardID;
-    modalRef.componentInstance.userType = this.user.userType;
+    modalRef.componentInstance.cardID = this.cardID;
+    // modalRef.componentInstance.userType = this.user.userType;
   }
 
   // test for keyup id value
   testInput() {
-    console.log(this.user.cardID, this.user.userType);
+    console.log(this.cardID);
   }
 
 }

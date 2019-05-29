@@ -24,6 +24,7 @@ export class UserinfoService {
   }
 
   getInitials(firstName, lastName) {
+    // for getting account initials
     const initials = firstName[0] + lastName[0];
     // console.log(initials);
     return of(initials);
@@ -31,20 +32,12 @@ export class UserinfoService {
 
   getUser(cardID): Observable<User> {
     // for getting account own data and information
-      if (this.currentUser.user_type !== 0) {
-        return this.httpService.get<User>(`${this.apiURL}/admins/${cardID}`);
-      } else {
-        return this.httpService.get<User>(`${this.apiURL}/students/${cardID}`);
-      }
+    return this.httpService.get<User>(`${this.apiURL}/users/${cardID}`);
   }
 
-  showUser(cardID, type): Observable<User> {
-    // for getting others account informacion
-    if (type > 0) {
-      return this.httpService.get<User>(`${this.apiURL}/admins/${cardID}`);
-    } else {
-      return this.httpService.get<User>(`${this.apiURL}/students/${cardID}`);
-    }
-  }
+  showUser(cardID): Observable<User> {
+    // for security feature to get others account information
+    return this.httpService.get<User>(`${this.apiURL}/security`, { params: { user_ID: cardID } });
 
+  }
 }

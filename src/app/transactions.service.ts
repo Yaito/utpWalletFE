@@ -26,14 +26,14 @@ export class TransactionsService {
 
   }
 
-  // getData(): Observable<Transaction[]> { return of(this.transactions); }Î
   getData(cardID): Observable<User> {
-    // return this.httpService.get<User>(`${this.apiURL}/students/${cardID}`);
-    if (this.currentUser.user_type !== 0) {
-      return this.httpService.get<User>(`${this.apiURL}/admins/${cardID}`);
-    } else {
-      return this.httpService.get<User>(`${this.apiURL}/students/${cardID}`);
-    }
+    // for getting account own transactions data
+    return this.httpService.get<User>(`${this.apiURL}/users/${cardID}`);
 
+  }
+
+  getAllTransactions():Observable<Transactions> {
+    // get all transactions data in the database
+    return this.httpService.get<Transactions>(`${this.apiURL}/transactions`);
   }
 }

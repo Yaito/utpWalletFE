@@ -40,7 +40,7 @@ export class AccountComponent implements OnInit, OnDestroy {
             // console.log(resIni); // testing initial purpose
           });
         this.spinner.hide();
-        console.log(res); // testing account details returned object
+        // console.log(res); // testing account details returned object
         // console.log(JSON.stringify(res));
         // console.log(typeof (this.userProfile));
       });

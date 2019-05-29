@@ -31,6 +31,7 @@ import { HelpComponent } from './help/help.component';
 import { SecurityResultComponent } from './security-result/security-result.component';
 import { RechargeModalComponent } from './recharge-modal/recharge-modal.component';
 import { PaymentModalComponent } from './payment-modal/payment-modal.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +66,8 @@ import { PaymentModalComponent } from './payment-modal/payment-modal.component';
     HelpComponent,
     SecurityResultComponent,
     RechargeModalComponent,
-    PaymentModalComponent
+    PaymentModalComponent,
+    RegisterComponent
   ],
   providers: [
     AccountComponent,

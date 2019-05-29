@@ -1,0 +1,58 @@
+#register {
+    margin: 10px auto auto 10px;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+#graphs {
+    margin: 10px auto auto 10px;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+
+.fixed_header tbody{
+    display: block;
+    overflow:auto;
+    height:425px;
+    width:100%;
+}
+
+.container {
+    margin-top: 30px;
+}
+
+.thead-dark {
+    text-align: center;
+}
+
+.admin-transactions {
+    margin: 10px;
+}
+
+.admin-analytics {
+    margin:10px;
+}
+
+.graphs-container {
+    height:500px;
+    width:100%;
+}
+
+.custom-class{
+    background-color: #28a745
+}
+  
+.default-color{
+    background-color: #dc3545
+}
+
+.rch-class {
+    color: #28a745;
+}
+
+.pay-class {
+    color: #dc3545
+}

@@ -1,3 +1,68 @@
-<p>
-  register works!
-</p>
+<div class="modal-header">
+  <h4 class="modal-title"><i class="fas fa-user-plus"></i> Registrar</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="fluid-container">
+  <form>
+    <div class="form-row access">
+      <div class="form-group username col-md-6">
+        <label for="inputEmail4">Usuario</label>
+        <input type="text" class="form-control" id="inputUsername" placeholder="Ex: luis.yao"
+          aria-describedby="usernameHelp">
+        <small id="usernameHelp" class="form-text text-muted">Nunca compartas tu usuario con nadie.</small>
+      </div>
+      <div class="form-group password col-md-6">
+        <label for="inputPassword4">Contraseña</label>
+        <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña"
+          aria-describedby="passwordHelp">
+        <small id="passwordHelp" class="form-text text-muted">Debe contener mínimo 6 caracteres.</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputSelect">Tipo de Usuario</label>
+      <select class="form-control" id="inputuserType" (change)="selectChangeHandler($event)">
+        <option disabled selected>Seleccione un tipo</option>
+        <option value=0>Estudiante</option>
+        <option value=1>Seguridad</option>
+        <option value=2>Operador de Transacción</option>
+        <option value=3>Administrador</option>
+      </select>
+    </div>
+
+      <div class="form-row access">
+        <div class="form-group fname col-md-6">
+          <label for="inputFirstname">Nombre</label>
+          <input type="text" class="form-control" id="inputFirstname" placeholder="Ex: Luis">
+        </div>
+        <div class="form-group lname col-md-6">
+          <label for="inputFamilyname">Apellido</label>
+          <input type="text" class="form-control" id="inputFamilyname" placeholder="Yao">
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label for="inputPersonalID">NIP</label>
+          <input type="text" class="form-control" id="inputPersonalID" placeholder="Número de Identidad Personal">
+        </div>
+
+    <ng-template [ngIf]="selectedUsertype == 0 ">
+        <div class="form-row access">
+          <div class="form-group fname col-md-6">
+            <label for="inputFaculty">Facultad</label>
+            <input type="text" class="form-control" id="inputFaculty" placeholder="Seleccione una facultad">
+          </div>
+          <div class="form-group lname col-md-6">
+            <label for="inputCareer">Carrera</label>
+            <input type="text" class="form-control" id="inputCareer" placeholder="Seleccione una carrera">
+          </div>
+        </div>
+      </ng-template>
+    <button type="submit" class="btn btn-primary btn-register">Registrar</button>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Aceptar</button>
+</div>

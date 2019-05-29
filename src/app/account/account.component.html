@@ -1,12 +1,24 @@
 <div *ngIf="currentUser" class='outer-container'>
 
-  <div class="container" *ngIf="userProfile">
+  <div class="fluid-container" *ngIf="userProfile">
     <div class="row out-row">
 
       <div class="col-4 profile-col">
         <div class='profile-pic'>
-          <div class="circle">{{ initials | uppercase }}</div>
-          <span class="name" style="display: block">{{ userProfile.first_name | titlecase }} {{ userProfile.last_name | titlecase }}</span>
+          <ng-template [ngIf]="currentUser.user_type == 0">
+            <div class="circle bg-info">{{ initials | uppercase }}</div>
+          </ng-template>
+          <ng-template [ngIf]="currentUser.user_type == 1">
+            <div class="circle bg-primary">{{ initials | uppercase }}</div>
+          </ng-template>
+          <ng-template [ngIf]="currentUser.user_type == 2">
+            <div class="circle bg-success">{{ initials | uppercase }}</div>
+          </ng-template>
+          <ng-template [ngIf]="currentUser.user_type == 3">
+            <div class="circle bg-warning">{{ initials | uppercase }}</div>
+          </ng-template>
+          <span class="name" style="display: block">{{ userProfile.first_name | titlecase }}
+            {{ userProfile.last_name | titlecase }}</span>
         </div>
       </div>
 
@@ -15,24 +27,24 @@
         <div *ngIf="currentUser.user_type == 0" class="row info-row">
           <div class="profile-info">
             <ul class="list-group">
-                <li class="list-group-item">ID de Cuenta: {{ userProfile.acc_ID }}</li>
-                <li class="list-group-item">NIP: {{ userProfile.personal_ID }}</li>
-                <li class="list-group-item">Tipo: {{ userProfile.user_type }}</li>
-                <li class="list-group-item">Facultad: {{ userProfile.account_faculty }}</li>
-                <li class="list-group-item">Carrera: {{ userProfile.account_career }}</li>
-              </ul>
+              <li class="list-group-item">ID de Cuenta: {{ userProfile.acc_ID }}</li>
+              <li class="list-group-item">NIP: {{ userProfile.personal_ID }}</li>
+              <li class="list-group-item">Tipo: {{ userProfile.user_type }}</li>
+              <li class="list-group-item">Facultad: {{ userProfile.account_faculty }}</li>
+              <li class="list-group-item">Carrera: {{ userProfile.account_career }}</li>
+            </ul>
           </div>
         </div>
 
         <div *ngIf="currentUser.user_type !== 0" class="row info-row">
-            <div class="profile-info">
-              <ul class="list-group">
-                  <li class="list-group-item">ID de Cuenta: {{ userProfile.admin_ID }}</li>
-                  <li class="list-group-item">NIP: {{ userProfile.personal_ID }}</li>
-                  <li class="list-group-item">Tipo de Operador: {{ userProfile.user_type }}</li>
-                </ul>
-            </div>
+          <div class="profile-info">
+            <ul class="list-group">
+              <li class="list-group-item">ID de Cuenta: {{ userProfile.admin_ID }}</li>
+              <li class="list-group-item">NIP: {{ userProfile.personal_ID }}</li>
+              <li class="list-group-item">Tipo de Operador: {{ userProfile.user_type }}</li>
+            </ul>
           </div>
+        </div>
 
         <div class="row balance-row">
           <div class="profile-balance">{{ userProfile.acc_balance | currency }}</div>
@@ -43,7 +55,7 @@
     </div>
 
   </div>
-
+  <hr>
   <app-transactions></app-transactions>
 
 </div>
