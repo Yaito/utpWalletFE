@@ -1,12 +1,23 @@
-// export interface Transaction {
-//         id: number;
-//         trx_ID: number;
-//         user: string;
-//         type: string;
-//         date: Date;
-//         description: string;
-//         amount: number;
-// }
+export interface University {
+        careers: Career;
+        faculties: Faculty;
+        user_type: RoleType;
+}
+
+export interface Career {
+        career_ID: string;
+        career: string;
+}
+
+export interface RoleType {
+        ID: number;
+        user_type: string;
+}
+
+export interface Faculty {
+        fac_id: string;
+        fac_description: string;
+}
 
 export interface User {
         acc_ID: number;
@@ -36,7 +47,7 @@ export interface Transactions {
         date: Date;
 }
 
-export interface RegisterForm {
+export interface accountForm {
         username: string;
         password: string;
         usertype: number;

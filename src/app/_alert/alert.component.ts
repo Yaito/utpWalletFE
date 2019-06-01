@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-
+import * as $ from 'jquery';
 import { AlertService } from '../alert.service';
 
 

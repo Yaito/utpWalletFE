@@ -5,64 +5,102 @@
   </button>
 </div>
 <div class="fluid-container">
-  <form>
-    <div class="form-row access">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-row user-password">
       <div class="form-group username col-md-6">
-        <label for="inputEmail4">Usuario</label>
-        <input type="text" class="form-control" id="inputUsername" placeholder="Ex: luis.yao"
-          aria-describedby="usernameHelp">
+        <label for="username">Usuario</label>
+        <input type="text" formControlName="username" class="form-control" placeholder="Ex: luis.yao"
+          [ngClass]="{ 'is-invalid': submitted && f.username.errors }" aria-describedby="usernameHelp">
         <small id="usernameHelp" class="form-text text-muted">Nunca compartas tu usuario con nadie.</small>
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">Usuario es requerido.</div>
+        </div>
       </div>
       <div class="form-group password col-md-6">
-        <label for="inputPassword4">Contraseña</label>
-        <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña"
-          aria-describedby="passwordHelp">
+        <label for="password">Contraseña</label>
+        <input type="password" formControlName="password" class="form-control" placeholder="Contraseña"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" aria-describedby="passwordHelp">
         <small id="passwordHelp" class="form-text text-muted">Debe contener mínimo 6 caracteres.</small>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputSelect">Tipo de Usuario</label>
-      <select class="form-control" id="inputuserType" (change)="selectChangeHandler($event)">
-        <option disabled selected>Seleccione un tipo</option>
-        <option value=0>Estudiante</option>
-        <option value=1>Seguridad</option>
-        <option value=2>Operador de Transacción</option>
-        <option value=3>Administrador</option>
-      </select>
-    </div>
-
-      <div class="form-row access">
-        <div class="form-group fname col-md-6">
-          <label for="inputFirstname">Nombre</label>
-          <input type="text" class="form-control" id="inputFirstname" placeholder="Ex: Luis">
-        </div>
-        <div class="form-group lname col-md-6">
-          <label for="inputFamilyname">Apellido</label>
-          <input type="text" class="form-control" id="inputFamilyname" placeholder="Yao">
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Contraseña es quererida.</div>
+          <div *ngIf="f.password.errors.minlength">Contraseña debe ser mínimo de 6 caracteres.</div>
         </div>
       </div>
+    </div>
 
-      <div class="form-group">
-          <label for="inputPersonalID">NIP</label>
-          <input type="text" class="form-control" id="inputPersonalID" placeholder="Número de Identidad Personal">
+      <div class="form-group usertype">
+          <label for="usertype">Tipo de Usuario</label>
+          <select (change)="typeSelected()" formControlName="usertype" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.usertype.errors }">
+            <option disabled selected>Seleccione un Tipo de Usuario</option>
+            <option *ngFor="let type of roleTypes" [ngValue]="type.ID">{{type.user_type}}</option>
+          </select>
+          <div *ngIf="submitted && f.usertype.errors" class="invalid-feedback">
+            <div *ngIf="f.usertype.errors.required">Tipo de Usuario es requerido.</div>
+          </div>
         </div>
+
+    <div class="form-row first-last-name">
+      <div class="form-group first_name col-md-6">
+        <label for="inputFirstname">Nombre</label>
+        <input type="text" formControlName="first_name" class="form-control" placeholder="Ex: Luis"
+          [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
+        <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+          <div *ngIf="f.first_name.errors.required">El nombre es requerido.</div>
+        </div>
+      </div>
+      <div class="form-group last_name col-md-6">
+        <label for="last_name">Apellido</label>
+        <input type="text" formControlName="last_name" class="form-control" placeholder="Ex: Yao"
+          [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }">
+        <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+          <div *ngIf="f.last_name.errors.required">Apellido es requerido.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group personal-id">
+      <label for="personal_ID">NIP</label>
+      <input type="text" formControlName="personal_ID" class="form-control" placeholder="Número de Identidad Personal"
+        [ngClass]="{ 'is-invalid': submitted && f.personal_ID.errors }">
+      <div *ngIf="submitted && f.personal_ID.errors" class="invalid-feedback">
+        <div *ngIf="f.personal_ID.errors.required">NIP es requerido.</div>
+      </div>
+    </div>
 
     <ng-template [ngIf]="selectedUsertype == 0 ">
-        <div class="form-row access">
-          <div class="form-group fname col-md-6">
-            <label for="inputFaculty">Facultad</label>
-            <input type="text" class="form-control" id="inputFaculty" placeholder="Seleccione una facultad">
-          </div>
-          <div class="form-group lname col-md-6">
-            <label for="inputCareer">Carrera</label>
-            <input type="text" class="form-control" id="inputCareer" placeholder="Seleccione una carrera">
+      <div class="form-row faculty-career">
+        <div class="form-group faculty col-md-6">
+          <label for="acc_faculty">Facultad</label>
+          <select (change)="typeSelected()" formControlName="acc_faculty" class="form-control"
+            placeholder="Seleccione una facultad" [ngClass]="{ 'is-invalid': submitted && f.acc_faculty.errors }">
+            <option disabled selected>Seleccione una facultad</option>
+            <option *ngFor="let faculty of faculties" [ngValue]="faculty.fac_id">{{faculty.fac_description}}</option>
+          </select>
+          <div *ngIf="submitted && f.acc_faculty.errors" class="invalid-feedback">
+            <div *ngIf="f.acc_faculty.errors.required">Facultad es requerido.</div>
           </div>
         </div>
-      </ng-template>
-    <button type="submit" class="btn btn-primary btn-register">Registrar</button>
+        <div class="form-group career col-md-6">
+            <label for="acc_career">Carrera</label>
+            <select (change)="typeSelected()" formControlName="acc_career" class="form-control"
+              placeholder="Seleccione una carrera" [ngClass]="{ 'is-invalid': submitted && f.acc_career.errors }">
+              <option disabled selected>Seleccione una carrera</option>
+              <option *ngFor="let career of careers" [ngValue]="career.career_ID">{{career.career}}</option>
+            </select>
+            <div *ngIf="submitted && f.acc_career.errors" class="invalid-feedback">
+              <div *ngIf="f.acc_career.errors.required">Carrera es requerido.</div>
+            </div>
+          </div>
+      </div>
+    </ng-template>
+    <!-- <button type="submit" class="btn btn-primary btn-register">Registrar</button> -->
+    <div class="form-group modal-footer">
+      <button class="btn btn-primary btn-register">Registrar</button>
+      <a routerLink="/admin" class="btn btn-link" (click)="activeModal.close('Close click')">Cancelar</a>
+    </div>
   </form>
 </div>
 
-<div class="modal-footer">
+<!-- <div class="modal-footer">
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Aceptar</button>
-</div>
+</div> -->
