@@ -13,7 +13,6 @@ import { UserinfoService } from 'src/app/userinfo.service';
 export class SecurityResultComponent implements OnInit {
   userProfile: User;
   initials: string;
-
   cardID: number; // this value is received from the parent component which activate this modal
 
   constructor(

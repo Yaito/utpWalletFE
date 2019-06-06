@@ -1,10 +1,91 @@
 <div class="modal-header">
-    <h4 class="modal-title"><i class="fas fa-comment-dollar"></i> Recarga</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+  <h4 class="modal-title"><i class="fas fa-comment-dollar"></i> Recarga</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 
-  <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Confirmar</button>
+<div class="fluid-container">
+
+  <ng-template #students [ngIf]="userProfile?.user_type === 'Estudiante' ">
+    <div class=" modal-body">
+      <div class="row info-row">
+        <div class="profile-info">
+          <ng-template [ngIf]="userProfile?.user_type == 'Estudiante'">
+            <div class="circle bg-info">{{ initials | uppercase }}</div>
+          </ng-template>
+          <ul class="list-group">
+            <li class="list-group-item">Nombre Completo: {{ userProfile?.first_name | titlecase }}
+              {{ userProfile?.last_name | titlecase }}</li>
+            <li class="list-group-item">Cédula: {{ userProfile?.personal_ID }}</li>
+            <li class="list-group-item">Tipo: {{ userProfile?.user_type }}</li>
+            <li class="list-group-item">Facultad: {{ userProfile?.account_faculty }}</li>
+            <li class="list-group-item">Carrera: {{ userProfile?.account_career }}</li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </ng-template>
+
+  <ng-template #admins [ngIf]="userProfile?.user_type !== 'Estudiante' ">
+    <div class="modal-body">
+      <div class="row info-row">
+        <div class="profile-info">
+          <ng-template [ngIf]="userProfile?.user_type == 'Operador seguridad'">
+            <div class="circle bg-primary">{{ initials | uppercase }}</div>
+          </ng-template>
+          <ng-template [ngIf]="userProfile?.user_type == 'Operador transacciones'">
+            <div class="circle bg-success">{{ initials | uppercase }}</div>
+          </ng-template>
+          <ng-template [ngIf]="userProfile?.user_type == 'Administrador'">
+            <div class="circle bg-warning">{{ initials | uppercase }}</div>
+          </ng-template>
+          <ul class="list-group">
+            <li class="list-group-item">Nombre Completo: {{ userProfile?.first_name | titlecase }}
+              {{ userProfile?.last_name | titlecase }}</li>
+            <li class="list-group-item">Cédula: {{ userProfile?.personal_ID }}</li>
+            <li class="list-group-item">Tipo de Operador: {{ userProfile?.user_type }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+
+  <form [formGroup]="rechargeForm" (ngSubmit)="onSubmit()">
+    <div class="form-group description">
+      <label for="description">Descripción</label>
+      <select (change)="onSelected()" formControlName="description" class="form-control" placeholder="Descripción"
+        [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+        <option disabled selected>Seleccione la descripción de pago</option>
+        <option Value="Recarga">Recarga</option>
+        <option Value="Bono">Bono</option>
+        <option Value="Devolución">Devolución</option>
+      </select>
+      <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+        <div *ngIf="f.description.errors.required">Descripción es requerida.</div>
+      </div>
+    </div>
+
+    <div class="form-group amount">
+      <label for="amount">Monto</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input (change)="onSelected()" type="number" formControlName="amount" class="form-control" placeholder="Monto"
+          [ngClass]="{ 'is-invalid': submitted && f.amount.errors }">
+        <div *ngIf="submitted && f.amount.errors" class="invalid-feedback">
+          <div *ngIf="f.amount.errors.required">Monto es quererido.</div>
+          <div *ngIf="f.amount.errors.pattern">El monto escrito tiene un formato incorrecto.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group modal-footer">
+      <button class="btn btn-primary btn-recharge">Recargar</button>
+      <a routerLink="/transaction" class="btn btn-link" (click)="activeModal.close('Close click')">Cancelar</a>
+    </div>
+
+  </form>
+</div>

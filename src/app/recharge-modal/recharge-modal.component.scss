@@ -5,3 +5,22 @@
 .fa-comment-dollar {
     color: white;
 }
+
+.fluid-container {
+    margin: 8px;
+    padding: 5px;
+}
+
+.circle {
+    float: left;
+    // display: inline-block;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    font-size: 100px;
+    color: #ffffff;
+    line-height: 200px;
+    text-align: center;
+    background-color:rgb(196, 196, 196);
+    margin: 10px;
+}

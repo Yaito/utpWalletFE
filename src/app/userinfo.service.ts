@@ -38,6 +38,9 @@ export class UserinfoService {
   showUser(cardID): Observable<User> {
     // for security feature to get others account information
     return this.httpService.get<User>(`${this.apiURL}/security`, { params: { user_ID: cardID } });
+  }
 
+  rechargeInfo(cardID): Observable<User> {
+    return this.httpService.get<User>(`${this.apiURL}/recharge`, { params: { user_ID: cardID } });
   }
 }
