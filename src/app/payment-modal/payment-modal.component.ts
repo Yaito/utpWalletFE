@@ -6,6 +6,8 @@ import { first } from 'rxjs/operators';
 
 import { AlertService } from '../alert.service';
 import { PayService } from '../pay.service';
+import { ArduinoService } from '../arduino.service';
+
 @Component({
   selector: 'app-payment-modal',
   templateUrl: './payment-modal.component.html',
@@ -15,23 +17,24 @@ export class PaymentModalComponent implements OnInit {
 
   paymentForm: FormGroup;
   submitted = false;
-
+  cardID: number; // test it should be received from previous component
   // change id to be get from local api arduino
-  cardID = 4; // test
+  // cardID = 4; // test
 
   constructor(
     public activeModal: NgbActiveModal,
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder,
     private alertService: AlertService,
-    private payService: PayService
+    private payService: PayService,
+    private arduinoService: ArduinoService
   ) { }
 
   ngOnInit() {
     this.spinner.show();
     this.paymentForm = this.formBuilder.group({
       description: [null, Validators.required],
-      amount: [null, [Validators.required, Validators.pattern(/^\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$/)]]
+      amount: [null, [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]]
     });
     this.spinner.hide();
   }
@@ -47,20 +50,8 @@ export class PaymentModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    // here goes the payment services
-    this.payService.pay(this.cardID, this.f.description.value, this.f.amount.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.spinner.hide();
-          console.log(data);
-          this.alertService.success(data.message);
-        },
-        error => {
-          this.spinner.hide();
-          this.alertService.error(error);
-        });
-    this.spinner.hide();
+    // Get cardID from Arduino and Send Payment
+    this.onPayment();
   }
 
   onSelected() {
@@ -68,4 +59,35 @@ export class PaymentModalComponent implements OnInit {
     console.log(this.paymentForm.value);
   }
 
+  onPayment() {
+    this.spinner.show();
+    this.arduinoService.read()
+      .subscribe(response => {
+        this.cardID = response.user_ID;
+        this.sendPay();
+        this.spinner.hide();
+      },
+        error => {
+          console.log(error);
+          this.spinner.hide();
+        }
+      );
+  }
+
+  sendPay() {
+    this.payService.pay(this.cardID, this.f.description.value, this.f.amount.value)
+    .pipe(first())
+    .subscribe(
+      data => {
+        this.spinner.hide();
+        console.log(data);
+        this.alertService.success(data.message);
+        this.activeModal.close();
+      },
+      error => {
+        this.spinner.hide();
+        this.alertService.error(error);
+        this.activeModal.close();
+      });
+  }
 }

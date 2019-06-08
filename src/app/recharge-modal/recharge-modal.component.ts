@@ -19,7 +19,7 @@ export class RechargeModalComponent implements OnInit {
   userProfile: User;
   initials;
 
-  cardID = 4; // test it should be received from previous component
+  cardID: number; // test it should be received from previous component
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -73,10 +73,12 @@ export class RechargeModalComponent implements OnInit {
           this.spinner.hide();
           console.log(data);
           this.alertService.success(data.message);
+          this.activeModal.close();
         },
         error => {
           this.spinner.hide();
           this.alertService.error(error);
+          this.activeModal.close();
         });
     this.spinner.hide();
   }

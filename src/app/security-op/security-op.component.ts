@@ -3,7 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { SecurityResultComponent } from '../security-result/security-result.component';
-
+import { ArduinoService } from '../arduino.service';
 @Component({
   selector: 'app-security-op',
   templateUrl: './security-op.component.html',
@@ -15,7 +15,8 @@ export class SecurityOpComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private arduinoService: ArduinoService
   ) { }
 
   ngOnInit() {
@@ -27,8 +28,21 @@ export class SecurityOpComponent implements OnInit {
   }
 
   openModal() {
-    const modalRef = this.modalService.open(SecurityResultComponent, { size: 'lg' });
-    modalRef.componentInstance.cardID = this.cardID;
+    this.spinner.show();
+    this.arduinoService.read()
+    .subscribe(response => {
+      console.log(response);
+      const aux = response.user_ID;
+      const modalRef = this.modalService.open(SecurityResultComponent, { size: 'lg' });
+      modalRef.componentInstance.cardID = aux;
+      // modalRef.componentInstance.cardID = this.cardID;
+      this.spinner.hide();
+    },
+    error => {
+      console.log(error);
+      this.spinner.hide();
+    }
+    );
     // modalRef.componentInstance.userType = this.user.userType;
   }
 
@@ -36,5 +50,15 @@ export class SecurityOpComponent implements OnInit {
   testInput() {
     console.log(this.cardID);
   }
+
+  // runArduino() {
+  //   let aux;
+  //   this.arduinoService.read()
+  //   .subscribe(response => {
+  //     aux = response.user_ID;
+  //     console.log(aux);
+  //   });
+  //   return aux;
+  // }
 
 }

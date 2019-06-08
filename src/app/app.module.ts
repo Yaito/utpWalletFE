@@ -31,6 +31,11 @@ import { HelpComponent } from './help/help.component';
 import { SecurityResultComponent } from './security-result/security-result.component';
 import { RechargeModalComponent } from './recharge-modal/recharge-modal.component';
 import { PaymentModalComponent } from './payment-modal/payment-modal.component';
+import { RegisterService } from './register.service';
+import { ArduinoService } from './arduino.service';
+import { PayService } from './pay.service';
+import { RechargeService } from './recharge.service';
+import { TransactionsService } from './transactions.service';
 
 @NgModule({
   declarations: [
@@ -72,6 +77,11 @@ import { PaymentModalComponent } from './payment-modal/payment-modal.component';
   providers: [
     AccountComponent,
     AuthService,
+    RegisterService,
+    ArduinoService,
+    PayService,
+    RechargeService,
+    TransactionsService,
     UserinfoService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }

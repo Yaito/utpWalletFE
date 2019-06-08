@@ -64,3 +64,7 @@ export enum Role {
         Operator = 2,
         Admin = 3
 }
+
+export interface ARD {
+        user_ID: number;
+}

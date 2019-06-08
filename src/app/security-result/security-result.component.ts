@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 import { User } from 'src/assets/models';
 import { UserinfoService } from 'src/app/userinfo.service';
+import { AlertService } from '../alert.service';
 
 @Component({
   selector: 'app-security-result',
@@ -18,6 +19,7 @@ export class SecurityResultComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     private userInfoServices: UserinfoService,
+    private alertService: AlertService,
     private spinner: NgxSpinnerService
   ) { }
 
@@ -35,6 +37,10 @@ export class SecurityResultComponent implements OnInit {
         // console.log(res);
         // console.log(JSON.stringify(res));
         // console.log(this.userProfile);
+      },
+      error => {
+        this.spinner.hide();
+        this.alertService.error(error);
       });
     this.spinner.hide();
   }

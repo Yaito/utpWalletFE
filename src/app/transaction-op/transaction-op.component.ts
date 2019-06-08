@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { RechargeModalComponent } from '../recharge-modal/recharge-modal.component';
 import { PaymentModalComponent } from '../payment-modal/payment-modal.component';
+import { ArduinoService } from '../arduino.service';
 @Component({
   selector: 'app-transaction-op',
   templateUrl: './transaction-op.component.html',
@@ -13,7 +14,8 @@ export class TransactionOpComponent implements OnInit {
 
   constructor(
     private spinner: NgxSpinnerService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private arduinoService: ArduinoService
   ) { }
 
   ngOnInit() {
@@ -26,8 +28,19 @@ export class TransactionOpComponent implements OnInit {
 
   rechargeModal() {
     this.spinner.show();
-    const modalRef = this.modalService.open(RechargeModalComponent, { size: 'lg' });
-    this.spinner.hide();
+    this.arduinoService.read()
+      .subscribe(response => {
+        console.log(response);
+        const aux = response.user_ID;
+        const modalRef = this.modalService.open(RechargeModalComponent, { size: 'lg' });
+        modalRef.componentInstance.cardID = aux; //  send CardID to next component
+        this.spinner.hide();
+      },
+        error => {
+          console.log(error);
+          this.spinner.hide();
+        }
+      );
   }
 
   paymentModal() {

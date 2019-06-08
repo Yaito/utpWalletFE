@@ -10,7 +10,9 @@
   <div class="fluid-container admin-analytics">
     <h1><span class="badge badge-warning header-analytics"><i class="fas fa-sort-numeric-up"></i> Análisis de Datos</span></h1>
 
-    <div class="graphs-container fluid-container">
+    <div class="graphs-container fluid-container" *ngIf='chart'>
+      <canvas id='myChart'>{{ chart }}</canvas>
+
     </div>
 
   </div>

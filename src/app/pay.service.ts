@@ -15,10 +15,11 @@ export class PayService {
     user_ID: number,
     description: string,
     amount: number
-    ) {
+  ) {
+    console.log({ user_ID, amount, description });
     // for registering a user
     return this.httpService.put<any>(`${this.apiURL}/pay`,
-    { user_ID, amount, description });
+      { user_ID, amount, description });
   }
 
 
