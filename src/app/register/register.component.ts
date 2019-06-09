@@ -6,7 +6,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 import { RegisterService } from '../register.service';
 import { AlertService } from '../alert.service';
-import { University, Career, Faculty, RoleType } from 'src/assets/models';
+import { ArduinoService } from '../arduino.service';
+import { Career, Faculty, RoleType } from 'src/assets/models';
 
 @Component({
   selector: 'app-register',
@@ -29,7 +30,8 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private alertService: AlertService,
     private spinner: NgxSpinnerService,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private arduinoService: ArduinoService
   ) { }
 
   ngOnInit() {
@@ -57,6 +59,7 @@ export class RegisterComponent implements OnInit {
       this.spinner.hide();
       return;
     }
+    // register account username and password
     this.registerService.registerUser(
       this.f.username.value,
       this.f.password.value,
@@ -65,6 +68,9 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          // write the cardID into the NFC card
+          this.writeCard(data.user_ID);
+          // register account information
           this.registerService.registerAccount(
             data.user_ID,
             this.f.first_name.value,
@@ -80,17 +86,21 @@ export class RegisterComponent implements OnInit {
               console.log(newUser);
               this.spinner.hide();
               this.alertService.success('Información Registrado', true);
+              this.activeModal.close();
             },
             error => {
               this.spinner.hide();
               this.alertService.error(error);
+              this.activeModal.close();
             });
           this.spinner.hide();
           this.alertService.success('Usuario Registrado', true);
+          this.activeModal.close();
         },
         error => {
           this.spinner.hide();
           this.alertService.error(error);
+          this.activeModal.close();
         });
   }
 
@@ -121,6 +131,21 @@ export class RegisterComponent implements OnInit {
         facultyControl.updateValueAndValidity();
         careerControl.updateValueAndValidity();
       });
+  }
+
+  writeCard(cardID) {
+              // write the cardID into the NFC card
+              this.arduinoService.write(cardID)
+              .subscribe(response => {
+                this.spinner.hide();
+                this.alertService.success(response.message);
+              },
+                error => {
+                  console.log(error);
+                  this.alertService.error(error);
+                  this.spinner.hide();
+                }
+              );
   }
 
 }

@@ -51,7 +51,7 @@ export class AdminComponent implements OnInit {
           parsedDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'short', day: 'numeric' }))
         });
         console.log(parsedDates);
-        // this.genCharts(parsedDates, money);
+        this.genCharts(parsedDates, money);
         // let ctx = document.getElementById('myChart');
         // this.chart = new Chart(ctx, {
         //   type: 'line',
