@@ -10,7 +10,11 @@ import { TransactionsService } from '../transactions.service';
   styleUrls: ['./transactions-all.component.scss']
 })
 export class TransactionsAllComponent implements OnInit {
-  content: Transactions[];
+  content: Transactions;
+
+  page = 1;
+  pageSize = 10;
+  contentSize;
 
   constructor(
     private transactionService: TransactionsService,
@@ -22,9 +26,17 @@ export class TransactionsAllComponent implements OnInit {
     this.transactionService.getAllTransactions()
       .subscribe(res => {
         this.content = res;
-        console.log('content=', this.content); // testing all transaction object
+        this.contentSize = res['transactions'].length;
+        console.log(this.content); // testing all transaction object
+        console.log(this.contentSize);
       });
     this.spinner.hide();
+  }
+
+  get transactions(): Transactions[] {
+    return this.content['transactions']
+      .map((line, i) => ({id: i + 1, ...line}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
 }

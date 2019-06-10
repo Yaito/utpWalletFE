@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="row" *ngFor='let row of content.transactions'>
+          <tr class="row" *ngFor='let row of transactions'>
             <th scope='row' class="col-1 d-flex justify-content-center trx_id">{{ row.trx_ID }}</th>
             <td class="col-1 d-flex justify-content-center id">{{ row.user_ID }}</td>
             <td class="col-1 d-flex justify-content-center trx" [ngClass]="{'custom-class': row.trx_type === 'RCH' && row.amount !== 0, 'default-color': row.trx_type !== 'RCH'}">{{ row.trx_type}}</td>
@@ -23,5 +23,17 @@
         </tbody>
       </table>
   </div>
+
+  <div class="d-flex justify-content-center p-2" *ngIf="content">
+      <ngb-pagination class="pagi" [collectionSize]="contentSize" [(page)]="page" [pageSize]="pageSize">
+      </ngb-pagination>
+    
+      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+        <option [ngValue]="6">Mostrar 6</option>
+        <option [ngValue]="8">Mostrar 8</option>
+        <option [ngValue]="10">Mostrar 10</option>
+        <option [ngValue]="15">Mostrar 15</option>
+      </select>
+    </div>
 
 

@@ -32,8 +32,8 @@ export class TransactionsService {
 
   }
 
-  getAllTransactions():Observable<Transactions[]> {
+  getAllTransactions(): Observable<Transactions> {
     // get all transactions data in the database
-    return this.httpService.get<Transactions[]>(`${this.apiURL}/transactions`);
+    return this.httpService.get<Transactions>(`${this.apiURL}/transactions`);
   }
 }
