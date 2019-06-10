@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // Main Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -36,6 +37,8 @@ import { ArduinoService } from './arduino.service';
 import { PayService } from './pay.service';
 import { RechargeService } from './recharge.service';
 import { TransactionsService } from './transactions.service';
+import { TransactionsAllComponent } from './transactions-all/transactions-all.component';
+import { GraphsComponent } from './graphs/graphs.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,9 @@ import { TransactionsService } from './transactions.service';
     AdminComponent,
     RechargeModalComponent,
     PaymentModalComponent,
-    RegisterComponent
+    RegisterComponent,
+    TransactionsAllComponent,
+    GraphsComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,8 @@ import { TransactionsService } from './transactions.service';
     HttpClientModule,
     RouterModule.forRoot([]),
     NgbModalModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgbModule
   ],
   entryComponents: [
     AboutUsComponent,
@@ -76,6 +82,7 @@ import { TransactionsService } from './transactions.service';
   ],
   providers: [
     AccountComponent,
+    AdminComponent,
     AuthService,
     RegisterService,
     ArduinoService,

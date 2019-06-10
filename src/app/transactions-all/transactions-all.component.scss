@@ -1,0 +1,28 @@
+.admin-transactions {
+    margin: 10px;
+}
+
+.fixed_header tbody{
+    display: block;
+    overflow:auto;
+    height:400px;
+    width:100%;
+}
+
+.custom-class{
+    background-color: #28a745;
+    border-radius: 10px;
+}
+  
+.default-color{
+    background-color: #dc3545;
+    border-radius: 10px;
+}
+
+.rch-class {
+    color: #28a745;
+}
+
+.pay-class {
+    color: #dc3545
+}
