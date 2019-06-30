@@ -5,9 +5,9 @@
           <tr class="row table-info">
             <th class="col-1 d-flex justify-content-center" scope="col">ID de Transacción</th>
             <th class="col-1 d-flex justify-content-center" scope="col">ID de Usuario</th>
-            <th class="col-1 d-flex justify-content-center" scope="col">Tipo</th>
-            <th class="col-4 d-flex justify-content-center" scope="col">Fecha</th>
-            <th class="col-3 d-flex justify-content-center" scope="col">Descripción</th>
+             <th appTableSortable="trx_type" class="col-1 d-flex justify-content-center" scope="col" (sort)="onSort($event)">Tipo</th>
+            <th appTableSortable="date" class="col-4 d-flex justify-content-center" scope="col" (sort)="onSort($event)">Fecha</th>
+            <th appTableSortable="description" class="col-3 d-flex justify-content-center" scope="col" (sort)="onSort($event)">Descripción</th>
             <th class="col-2 d-flex justify-content-center" scope="col">Monto</th>
           </tr>
         </thead>

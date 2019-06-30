@@ -1,7 +1,88 @@
-<div class="fluid-container admin-analytics">
-    <h1><span class="badge badge-warning header-analytics"><i class="fas fa-sort-numeric-up"></i> Análisis de Datos</span></h1>
-    <div class="graphs-container fluid-container">
+<div class="container-fluid admin-analytics">
+  <h1>
+    <span class="badge badge-warning header-analytics">
+      <i class="fas fa-sort-numeric-up"></i> Análisis de Datos
+    </span>
+  </h1>
 
-    </div>
+  <div class="container-fluid tools">
+      <button type="button" class="btn btn-info" (click)='onCharts(1)'><i class="fas fa-chart-pie"></i></button>
+      <a><b>Día</b></a>
+      <button type="button" class="btn btn-info" (click)='onCharts(2)'><i class="fas fa-chart-area"></i></button>
+      <a><b>Mes</b></a>
+      <button type="button" class="btn btn-info" (click)='onCharts(3)'><i class="fas fa-chart-bar"></i></button>
+      <a><b>Año</b></a>
+      <button type="button" class="btn btn-info" (click)='onCharts(4)'><i class="fas fa-chart-bar"></i></button>
+      <a><b>Entre Años</b></a>
 
   </div>
+
+  <div class="graphs-container container-fluid">
+
+    <ng-template [ngIf]=chart1>
+      <div class="graph graphs-1">
+        <canvas id="singledayChart" width="400" height="400">{{ singledaychart }}</canvas>
+        Día: <input class="col-2" type="number" [(ngModel)]="sDay" />
+        Mes: <select class="custom-select col-3" style="width: auto" [(ngModel)]="sMonth">
+          <option [ngValue]="1">Enero</option>
+          <option [ngValue]="2">Febrero</option>
+          <option [ngValue]="3">Marzo</option>
+          <option [ngValue]="4">Abril</option>
+          <option [ngValue]="5">Mayo</option>
+          <option [ngValue]="6">Junio</option>
+          <option [ngValue]="7">Julio</option>
+          <option [ngValue]="8">Agosto</option>
+          <option [ngValue]="9">Septiembre</option>
+          <option [ngValue]="10">Octubre</option>
+          <option [ngValue]="11">Noviembre</option>
+          <option [ngValue]="12">Diciembre</option>
+        </select>
+        Año: <input class="col-3" type="number" [(ngModel)]="sYear" />
+        <button type="button" class="btn btn-warning" (click)='dayCharts()'><i class="fas fa-chart-pie"></i></button>
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]=chart2>
+      <div class="graph graphs-2">
+        <canvas id="daysChart" width="400" height="400">{{ daychart }}</canvas>
+        Mes: <select class="custom-select col-3" style="width: auto" [(ngModel)]="month">
+          <option [ngValue]="1">Enero</option>
+          <option [ngValue]="2">Febrero</option>
+          <option [ngValue]="3">Marzo</option>
+          <option [ngValue]="4">Abril</option>
+          <option [ngValue]="5">Mayo</option>
+          <option [ngValue]="6">Junio</option>
+          <option [ngValue]="7">Julio</option>
+          <option [ngValue]="8">Agosto</option>
+          <option [ngValue]="9">Septiembre</option>
+          <option [ngValue]="10">Octubre</option>
+          <option [ngValue]="11">Noviembre</option>
+          <option [ngValue]="12">Diciembre</option>
+        </select>
+        Año: <input class="col-3" type="number" [(ngModel)]="monthYear" />
+        <button type="button" class="btn btn-warning" (click)='dayspermonthCharts()'><i
+            class="fas fa-chart-area"></i></button>
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]=chart3>
+      <div class="graph graphs-3">
+        <canvas id="monthsChart" width="400" height="400">{{ monthschart }}</canvas>
+        Año: <input class="col-3" type="number" [(ngModel)]="year" />
+        <button type="button" class="btn btn-warning" (click)='monthsperyearCharts()'><i
+            class="fas fa-chart-bar"></i></button>
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]=chart4>
+      <div class="graph graphs-4">
+        <canvas id="yearsChart" width="400" height="400">{{ yearschart }}</canvas>
+        Inicial: <input class="col-3" type="number" [(ngModel)]="initial_year" />
+        Final: <input class="col-3" type="number" [(ngModel)]="final_year" />
+        <button type="button" class="btn btn-warning" (click)='yearsCharts()'><i class="fas fa-chart-bar"></i></button>
+      </div>
+    </ng-template>
+
+  </div>
+
+</div>

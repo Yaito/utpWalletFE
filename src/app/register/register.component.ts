@@ -18,12 +18,14 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   submitted = false;
+  cardReady = false;
 
   careers: Career[]; // object received from the previous component
   faculties: Faculty[]; // object received from the previous component
   roleTypes: RoleType[]; // object received from the previous component
 
   selectedUsertype; // for dropdown element
+  newcardID; // for new card
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -68,8 +70,9 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          console.log(data);
           // write the cardID into the NFC card
-          this.writeCard(data.user_ID);
+          // this.writeCard(data.user_ID);
           // register account information
           this.registerService.registerAccount(
             data.user_ID,
@@ -80,28 +83,34 @@ export class RegisterComponent implements OnInit {
             this.f.acc_career.value,
             this.f.usertype.value
           )
-          .pipe(first())
-          .subscribe(
-            newUser => {
-              console.log(newUser);
-              this.spinner.hide();
-              this.alertService.success('Información Registrado', true);
-              this.activeModal.close();
-            },
-            error => {
-              this.spinner.hide();
-              this.alertService.error(error);
-              this.activeModal.close();
-            });
+            .pipe(first())
+            .subscribe(
+              newUser => {
+                console.log(newUser);
+                this.spinner.hide();
+                this.alertService.success('Información Registrado', true);
+                // this.activeModal.close();
+              },
+              error => {
+                this.spinner.hide();
+                this.alertService.error(error);
+                this.activeModal.close();
+              });
           this.spinner.hide();
+          ///////
+          this.cardReady = !this.cardReady;
+          this.newcardID = data.user_ID;
+          ///////
           this.alertService.success('Usuario Registrado', true);
-          this.activeModal.close();
-        },
+          // this.activeModal.close();
+        }
+        ,
         error => {
           this.spinner.hide();
           this.alertService.error(error);
           this.activeModal.close();
-        });
+        }
+        );
   }
 
   typeSelected() {
@@ -133,19 +142,22 @@ export class RegisterComponent implements OnInit {
       });
   }
 
-  writeCard(cardID) {
-              // write the cardID into the NFC card
-              this.arduinoService.write(cardID)
-              .subscribe(response => {
-                this.spinner.hide();
-                this.alertService.success(response.message);
-              },
-                error => {
-                  console.log(error);
-                  this.alertService.error(error);
-                  this.spinner.hide();
-                }
-              );
+  writeCard(newcardID) {
+    this.spinner.show();
+    // write the cardID into the NFC card
+    this.arduinoService.write(newcardID)
+      .subscribe(response => {
+        this.alertService.success(response.message);
+        this.spinner.hide();
+        this.activeModal.close();
+      },
+        error => {
+          console.log(error);
+          this.alertService.error(error);
+          this.spinner.hide();
+          this.activeModal.close();
+        }
+      );
   }
 
 }

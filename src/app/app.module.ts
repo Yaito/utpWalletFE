@@ -39,6 +39,7 @@ import { RechargeService } from './recharge.service';
 import { TransactionsService } from './transactions.service';
 import { TransactionsAllComponent } from './transactions-all/transactions-all.component';
 import { GraphsComponent } from './graphs/graphs.component';
+import { TableSortableDirective } from './_directives/table-sortable.directive';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { GraphsComponent } from './graphs/graphs.component';
     PaymentModalComponent,
     RegisterComponent,
     TransactionsAllComponent,
-    GraphsComponent
+    GraphsComponent,
+    TableSortableDirective
   ],
   imports: [
     BrowserModule,

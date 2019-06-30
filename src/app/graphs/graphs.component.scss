@@ -1,8 +1,42 @@
 .admin-analytics {
-    margin:10px;
+    margin:5px;
 }
 
+.header-analytics {
+    margin-bottom: 10px;
+}
+
+
 .graphs-container {
-    height:400px;
-    width:100%;
+    // height:400px;
+    // width:100%;
+    display: flex;
+    margin: auto;
+    padding: 5px;
+}
+
+canvas {
+    margin: auto;
+    text-align: center;
+};
+
+.btn {
+    margin: 5px;
+    border-radius: 50%;
+    height: 45px;
+    width: 45px;
+}
+
+.graph {
+    margin: 5px;
+    text-align: center;
+}
+
+.graphs-1 {
+    height: 500px;
+    width: 400px;
+}
+
+.tools {
+    padding: 0px;
 }

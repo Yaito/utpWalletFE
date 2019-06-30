@@ -28,16 +28,17 @@
       </div>
     </div>
 
-      <div class="form-group usertype">
-          <label for="usertype">Tipo de Usuario</label>
-          <select (change)="typeSelected()" formControlName="usertype" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.usertype.errors }">
-            <option disabled selected>Seleccione un Tipo de Usuario</option>
-            <option *ngFor="let type of roleTypes" [ngValue]="type.ID">{{type.user_type}}</option>
-          </select>
-          <div *ngIf="submitted && f.usertype.errors" class="invalid-feedback">
-            <div *ngIf="f.usertype.errors.required">Tipo de Usuario es requerido.</div>
-          </div>
-        </div>
+    <div class="form-group usertype">
+      <label for="usertype">Tipo de Usuario</label>
+      <select (change)="typeSelected()" formControlName="usertype" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.usertype.errors }">
+        <option disabled selected>Seleccione un Tipo de Usuario</option>
+        <option *ngFor="let type of roleTypes" [ngValue]="type.ID">{{type.user_type}}</option>
+      </select>
+      <div *ngIf="submitted && f.usertype.errors" class="invalid-feedback">
+        <div *ngIf="f.usertype.errors.required">Tipo de Usuario es requerido.</div>
+      </div>
+    </div>
 
     <div class="form-row first-last-name">
       <div class="form-group first_name col-md-6">
@@ -81,18 +82,25 @@
           </div>
         </div>
         <div class="form-group career col-md-6">
-            <label for="acc_career">Carrera</label>
-            <select (change)="typeSelected()" formControlName="acc_career" class="form-control"
-              placeholder="Seleccione una carrera" [ngClass]="{ 'is-invalid': submitted && f.acc_career.errors }">
-              <option disabled selected>Seleccione una carrera</option>
-              <option *ngFor="let career of careers" [ngValue]="career.career_ID">{{career.career}}</option>
-            </select>
-            <div *ngIf="submitted && f.acc_career.errors" class="invalid-feedback">
-              <div *ngIf="f.acc_career.errors.required">Carrera es requerido.</div>
-            </div>
+          <label for="acc_career">Carrera</label>
+          <select (change)="typeSelected()" formControlName="acc_career" class="form-control"
+            placeholder="Seleccione una carrera" [ngClass]="{ 'is-invalid': submitted && f.acc_career.errors }">
+            <option disabled selected>Seleccione una carrera</option>
+            <option *ngFor="let career of careers" [ngValue]="career.career_ID">{{career.career}}</option>
+          </select>
+          <div *ngIf="submitted && f.acc_career.errors" class="invalid-feedback">
+            <div *ngIf="f.acc_career.errors.required">Carrera es requerido.</div>
           </div>
+        </div>
       </div>
     </ng-template>
+
+    <ng-template [ngIf]=cardReady>
+      <div class="btn-container">
+        <button type=button class="btn btn-success btn-tarjeta" (click)="writeCard(newcardID)">Crear</button>
+      </div>
+    </ng-template>
+
     <!-- <button type="submit" class="btn btn-primary btn-register">Registrar</button> -->
     <div class="form-group modal-footer">
       <button class="btn btn-primary btn-register">Registrar</button>
