@@ -7,6 +7,7 @@ import { first } from 'rxjs/operators';
 import { AlertService } from '../alert.service';
 import { PayService } from '../pay.service';
 import { ArduinoService } from '../arduino.service';
+import {SnotifyService} from 'ng-snotify';
 
 @Component({
   selector: 'app-payment-modal',
@@ -27,7 +28,8 @@ export class PaymentModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private alertService: AlertService,
     private payService: PayService,
-    private arduinoService: ArduinoService
+    private arduinoService: ArduinoService,
+    private snotifyService: SnotifyService
   ) { }
 
   ngOnInit() {
@@ -69,6 +71,14 @@ export class PaymentModalComponent implements OnInit {
       },
         error => {
           console.log(error);
+          this.snotifyService.error(error, 'Error', {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            position: 'rightTop',
+            icon: '/assets/Logo_RAW.png'
+          });
           this.spinner.hide();
         }
       );
@@ -81,12 +91,28 @@ export class PaymentModalComponent implements OnInit {
       data => {
         this.spinner.hide();
         console.log(data);
-        this.alertService.success(data.message);
+        // this.alertService.success(data.message);
+        this.snotifyService.success(data.message + ' Se ha cobrado $' + this.f.amount.value + ' a la cuenta.', 'Cobro Exitoso', {
+          timeout: 5000,
+          showProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          position: 'rightTop',
+          icon: '/assets/Logo_RAW.png'
+        });
         this.activeModal.close();
       },
       error => {
         this.spinner.hide();
-        this.alertService.error(error);
+        // this.alertService.error(error);
+        this.snotifyService.error(error, 'Error', {
+          timeout: 5000,
+          showProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          position: 'rightTop',
+          icon: '/assets/Logo_RAW.png'
+        });
         this.activeModal.close();
       });
   }

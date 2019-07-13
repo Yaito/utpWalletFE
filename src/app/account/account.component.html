@@ -15,7 +15,8 @@
             <div class="circle bg-success">{{ initials | uppercase }}</div>
           </ng-template>
           <ng-template [ngIf]="currentUser.user_type == 3">
-            <div class="circle bg-warning">{{ initials | uppercase }}</div>
+            <div class="picture" *ngIf="pic"><img class="picture" id="profileImage" src="assets/author01.png"></div>
+            <div class="circle bg-warning" *ngIf="!pic">{{ initials | uppercase }}</div>
           </ng-template>
           <span class="name" style="display: block">{{ userProfile.first_name | titlecase }}
             {{ userProfile.last_name | titlecase }}</span>
@@ -47,7 +48,7 @@
         </div>
 
         <div class="row balance-row">
-          <div class="profile-balance">{{ userProfile.acc_balance | currency }}</div>
+          <div class="profile-balance"><span class="balance-label">Saldo: </span> {{ userProfile.acc_balance | currency }}</div>
         </div>
 
       </div>

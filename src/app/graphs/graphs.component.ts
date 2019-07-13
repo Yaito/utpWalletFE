@@ -14,13 +14,13 @@ export class GraphsComponent implements OnInit {
   singledaychart: [];
   chart1 = false;
 
-  daychart = [];
+  daychart;
   chart2 = false;
 
-  monthschart = [];
+  monthschart;
   chart3 = false;
 
-  yearschart = [];
+  yearschart;
   chart4 = false;
 
   // line chart
@@ -84,6 +84,10 @@ export class GraphsComponent implements OnInit {
   }
 
   dayspermonthCharts() {
+    if (this.daychart != null) {
+      this.daychart.destroy();
+  }
+
     this.spinner.show();
     this.transactionService.daysperMonth(this.month, this.monthYear)
       .subscribe(res => {
@@ -143,14 +147,18 @@ export class GraphsComponent implements OnInit {
   }
 
   monthsperyearCharts() {
+    if (this.monthschart != null) {
+      this.monthschart.destroy();
+  }
+
     this.spinner.show();
     this.transactionService.monthsperYear(this.year)
       .subscribe(res => {
-        // console.log(res);
+        console.log(res);
 
         let rchAmount = res['Monthly_transactions'].map(res => res.Recharge);
         let payAmount = res['Monthly_transactions'].map(res => res.Payment);
-        let months = res['Monthly_transactions'].map(res => res.day);
+        let months = res['Monthly_transactions'].map(res => res.month);
 
         let ctx = document.getElementById('monthsChart');
         this.monthschart = new Chart(ctx, {
@@ -201,6 +209,10 @@ export class GraphsComponent implements OnInit {
   }
 
   yearsCharts() {
+    if (this.yearschart != null) {
+      this.yearschart.destroy();
+  }
+
     this.spinner.show();
     this.transactionService.betweenYears(this.initial_year, this.final_year)
       .subscribe(res => {

@@ -20,6 +20,7 @@ import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { AlertComponent } from './_alert/alert.component';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 // Services
 import { AuthService } from './auth.service';
 import { UserinfoService } from './userinfo.service';
@@ -72,7 +73,8 @@ import { TableSortableDirective } from './_directives/table-sortable.directive';
     RouterModule.forRoot([]),
     NgbModalModule,
     NgxSpinnerModule,
-    NgbModule
+    NgbModule,
+    SnotifyModule
   ],
   entryComponents: [
     AboutUsComponent,
@@ -93,7 +95,9 @@ import { TableSortableDirective } from './_directives/table-sortable.directive';
     TransactionsService,
     UserinfoService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService
   ],
   bootstrap: [AppComponent]
 })

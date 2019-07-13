@@ -16,6 +16,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   initials: string;
   userProfile: User;
+  pic = true; //for profile image testing default is false
 
   constructor(
     private userInfoServices: UserinfoService,

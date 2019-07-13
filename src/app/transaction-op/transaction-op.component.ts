@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RechargeModalComponent } from '../recharge-modal/recharge-modal.component';
 import { PaymentModalComponent } from '../payment-modal/payment-modal.component';
 import { ArduinoService } from '../arduino.service';
+import {SnotifyService} from 'ng-snotify';
 @Component({
   selector: 'app-transaction-op',
   templateUrl: './transaction-op.component.html',
@@ -15,7 +16,8 @@ export class TransactionOpComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private modalService: NgbModal,
-    private arduinoService: ArduinoService
+    private arduinoService: ArduinoService,
+    private snotifyService: SnotifyService
   ) { }
 
   ngOnInit() {
@@ -38,6 +40,14 @@ export class TransactionOpComponent implements OnInit {
       },
         error => {
           console.log(error);
+          this.snotifyService.error(error, 'Error', {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            position: 'rightTop',
+            icon: '/assets/Logo_RAW.png'
+          });
           this.spinner.hide();
         }
       );

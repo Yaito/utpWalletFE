@@ -64,3 +64,18 @@
     margin-left: -15px;
     margin-top: 30px;
 }
+
+.balance-label {
+    color: #a19f9f;
+}
+
+.picture {
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}

@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 import { SecurityResultComponent } from '../security-result/security-result.component';
 import { ArduinoService } from '../arduino.service';
+import {SnotifyService} from 'ng-snotify';
 @Component({
   selector: 'app-security-op',
   templateUrl: './security-op.component.html',
@@ -16,7 +17,8 @@ export class SecurityOpComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private spinner: NgxSpinnerService,
-    private arduinoService: ArduinoService
+    private arduinoService: ArduinoService,
+    private snotifyService: SnotifyService
   ) { }
 
   ngOnInit() {
@@ -40,6 +42,14 @@ export class SecurityOpComponent implements OnInit {
     },
     error => {
       console.log(error);
+      this.snotifyService.error(error, 'Error', {
+        timeout: 5000,
+        showProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        position: 'rightTop',
+        icon: '/assets/Logo_RAW.png'
+      });
       this.spinner.hide();
     }
     );

@@ -7,6 +7,7 @@ import { first } from 'rxjs/operators';
 import { AlertService } from '../alert.service';
 import { RechargeService } from '../recharge.service';
 import { UserinfoService } from '../userinfo.service';
+import {SnotifyService} from 'ng-snotify';
 import { User } from 'src/assets/models';
 @Component({
   selector: 'app-recharge-modal',
@@ -27,7 +28,8 @@ export class RechargeModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private alertService: AlertService,
     private rechargeService: RechargeService,
-    private userInfoServices: UserinfoService
+    private userInfoServices: UserinfoService,
+    private snotifyService: SnotifyService
   ) { }
 
   ngOnInit() {
@@ -72,12 +74,28 @@ export class RechargeModalComponent implements OnInit {
         data => {
           this.spinner.hide();
           console.log(data);
-          this.alertService.success(data.message);
+          // this.alertService.success(data.message);
+          this.snotifyService.success(data.message + ' Se ha agregado $' + this.f.amount.value + ' a la cuenta.', 'Recarga Exitosa', {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            position: 'rightTop',
+            icon: '/assets/Logo_RAW.png'
+          });
           this.activeModal.close();
         },
         error => {
           this.spinner.hide();
-          this.alertService.error(error);
+          // this.alertService.error(error);
+          this.snotifyService.error(error, 'Error', {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            position: 'rightTop',
+            icon: '/assets/Logo_RAW.png'
+          });
           this.activeModal.close();
         });
     this.spinner.hide();

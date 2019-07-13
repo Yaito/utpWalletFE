@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { User } from 'src/assets/models';
 import { UserinfoService } from 'src/app/userinfo.service';
 import { AlertService } from '../alert.service';
+import {SnotifyService} from 'ng-snotify';
 
 @Component({
   selector: 'app-security-result',
@@ -20,7 +21,8 @@ export class SecurityResultComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private userInfoServices: UserinfoService,
     private alertService: AlertService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private snotifyService: SnotifyService
   ) { }
 
   ngOnInit() {
@@ -40,7 +42,15 @@ export class SecurityResultComponent implements OnInit {
       },
       error => {
         this.spinner.hide();
-        this.alertService.error(error);
+        this.snotifyService.error(error, 'Error', {
+          timeout: 5000,
+          showProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          position: 'rightTop',
+          icon: '/assets/Logo_RAW.png'
+        });
+        // this.alertService.error(error);
       });
     this.spinner.hide();
   }
