@@ -7,6 +7,7 @@ import { RegisterComponent } from '../register/register.component';
 import { Transactions, Career, Faculty, RoleType } from 'src/assets/models';
 import { RegisterService } from '../register.service';
 import { AlertService } from '../alert.service';
+import {SnotifyService} from 'ng-snotify';
 
 @Component({
   selector: 'app-admin',
@@ -27,7 +28,8 @@ export class AdminComponent implements OnInit {
     private modalService: NgbModal,
     private spinner: NgxSpinnerService,
     private alertService: AlertService,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private snotifyService: SnotifyService
   ) { }
 
   ngOnInit() {
@@ -55,7 +57,14 @@ export class AdminComponent implements OnInit {
           this.spinner.hide();
         },
         error => {
-          this.alertService.error(error);
+          this.snotifyService.error(error, 'Error de Registro', {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            position: 'rightTop',
+            icon: '/assets/Logo_RAW.png'
+          });
           this.spinner.hide();
         });
   }

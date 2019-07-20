@@ -8,6 +8,7 @@ import { RegisterService } from '../register.service';
 import { AlertService } from '../alert.service';
 import { ArduinoService } from '../arduino.service';
 import { Career, Faculty, RoleType } from 'src/assets/models';
+import {SnotifyService} from 'ng-snotify';
 
 @Component({
   selector: 'app-register',
@@ -33,7 +34,8 @@ export class RegisterComponent implements OnInit {
     private alertService: AlertService,
     private spinner: NgxSpinnerService,
     private registerService: RegisterService,
-    private arduinoService: ArduinoService
+    private arduinoService: ArduinoService,
+    private snotifyService: SnotifyService
   ) { }
 
   ngOnInit() {
@@ -88,12 +90,28 @@ export class RegisterComponent implements OnInit {
               newUser => {
                 console.log(newUser);
                 this.spinner.hide();
-                this.alertService.success('Información Registrado', true);
+                // this.alertService.success('Información Registrado', true);
+                this.snotifyService.info('Información Registrado.', 'Registrar', {
+                  timeout: 5000,
+                  showProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  position: 'rightTop',
+                  icon: '/assets/Logo_RAW.png'
+                });
                 // this.activeModal.close();
               },
               error => {
                 this.spinner.hide();
-                this.alertService.error(error);
+                // this.alertService.error(error);
+                this.snotifyService.error(error, 'Error', {
+                  timeout: 5000,
+                  showProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  position: 'rightTop',
+                  icon: '/assets/Logo_RAW.png'
+                });
                 this.activeModal.close();
               });
           this.spinner.hide();
@@ -101,13 +119,28 @@ export class RegisterComponent implements OnInit {
           this.cardReady = !this.cardReady;
           this.newcardID = data.user_ID;
           ///////
-          this.alertService.success('Usuario Registrado', true);
+          // this.alertService.success('Usuario Registrado', true);
+          this.snotifyService.info('Usuario Creado.', 'Registrar', {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            position: 'rightTop',
+            icon: '/assets/Logo_RAW.png'
+          });
           // this.activeModal.close();
         }
         ,
         error => {
           this.spinner.hide();
-          this.alertService.error(error);
+          this.snotifyService.error(error, 'Error', {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            position: 'rightTop',
+            icon: '/assets/Logo_RAW.png'
+          });
           this.activeModal.close();
         }
         );
@@ -147,13 +180,27 @@ export class RegisterComponent implements OnInit {
     // write the cardID into the NFC card
     this.arduinoService.write(newcardID)
       .subscribe(response => {
-        this.alertService.success(response.message);
+        this.snotifyService.info('Tarjeta Creada.', 'Registrar', {
+          timeout: 5000,
+          showProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          position: 'rightTop',
+          icon: '/assets/Logo_RAW.png'
+        });
         this.spinner.hide();
         this.activeModal.close();
       },
         error => {
           console.log(error);
-          this.alertService.error(error);
+          this.snotifyService.error(error, 'Error', {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            position: 'rightTop',
+            icon: '/assets/Logo_RAW.png'
+          });
           this.spinner.hide();
           this.activeModal.close();
         }
