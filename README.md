@@ -1,5 +1,5 @@
 # UtpWallet
-![UTP Wallet Logo](utpWalletFE/src/assets/Logo.png)
+![UTP Wallet Logo](src/assets/Logo.png)
 Format: ![Logo of the Application](https://github.com/Yaito/utpWalletFE)
 A web based application dedicated for the Technological University of Panama internals credencials and transacctions.
 
@@ -15,11 +15,11 @@ You will also need [Python 3](https://www.python.org/) and the [Flask](https://p
 Besides these dependency you will also need an [Arduino One](https://store.arduino.cc/usa/arduino-uno-rev3) Board to load the **read_write.ino** located in the utpwallet_arduino folder.
 
 ## Screenshots
-![Login](utpWalletFE/Screenshots/Login.png)
-![Profile](utpWalletFE/Screenshots/Profile.png)
-![Security](utpWalletFE/Screenshots/Security.png)
-![Transactions](utpWalletFE/Screenshots/Transactions.png)
-![Admin](utpWalletFE/Screenshots/Admin.png)
+![Login](Screenshots/Login.png)
+![Profile](Screenshots/Profile.png)
+![Security](Screenshots/Security.png)
+![Transactions](Screenshots/Transactions.png)
+![Admin](Screenshots/Admin.png)
 
 ## Usage
 In order to run the application you need to first get all the points mentioned in the **Setup** section.
