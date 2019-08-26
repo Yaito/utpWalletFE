@@ -1,27 +1,48 @@
 # UtpWallet
+![UTP Wallet Logo](utpWalletFE/src/assets/Logo.png)
+Format: ![Logo of the Application](https://github.com/Yaito/utpWalletFE)
+A web based application dedicated for the Technological University of Panama internals credencials and transacctions.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+## Setup
+Since the application was build using [Angular 7.3.8](https://github.com/angular/angular-cli), you will need to have that installed, is you have that checked out just go the project directory and run the following code to get all the dependency stated in the package.json file:
 
-## Development server
+```javascript
+npm install
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+You will also need [Python 3](https://www.python.org/) and the [Flask](https://palletsprojects.com/p/flask/) and [Flask-cors](https://flask-cors.readthedocs.io/en/latest/) Library to be able to test all the Features related to the NFC Tags.
 
-## Code scaffolding
+Besides these dependency you will also need an [Arduino One](https://store.arduino.cc/usa/arduino-uno-rev3) Board to load the **read_write.ino** located in the utpwallet_arduino folder.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Screenshots
+![Login](utpWalletFE/Screenshots/Login.png)
+![Profile](utpWalletFE/Screenshots/Profile.png)
+![Security](utpWalletFE/Screenshots/Security.png)
+![Transactions](utpWalletFE/Screenshots/Transactions.png)
+![Admin](utpWalletFE/Screenshots/Admin.png)
 
-## Build
+## Usage
+In order to run the application you need to first get all the points mentioned in the **Setup** section.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Arduino
+To run the local API to access the NFC fetures, go to the **utpwallet_arduino** directory and run the app.py using python 3.
 
-## Running unit tests
+```python
+python3 app.py
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Angular
+To run the angular dev server using node.js, you will need to go the root directory of the project, and run:
 
-## Running end-to-end tests
+```javascript
+ng serve
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Go to your prefered browser (I personally prefer Chrome), then navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Further help
+## Authors
+* **Luis Yao** - Front-end Developer - [LinkedIn](https://www.linkedin.com/in/luisyaoyang/)
+* **Roderick Mastrolinardo** - Back-end Develper - [Twitter](https://twitter.com/RodMastro)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Acknoledgement
+* **Omar Mejía** - Fullstack Developer - [LinkedIn](https://www.linkedin.com/in/omar-mejia-35940a161/)
