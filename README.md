@@ -11,7 +11,7 @@ npm install
 
 You will also need [Python 3](https://www.python.org/) and the [Flask](https://palletsprojects.com/p/flask/) and [Flask-cors](https://flask-cors.readthedocs.io/en/latest/) Library to be able to test all the Features related to the NFC Tags.
 
-Besides these dependency you will also need an [Arduino One](https://store.arduino.cc/usa/arduino-uno-rev3) Board to load the **read_write.ino** located in the utpwallet_arduino folder.
+Besides these dependency you will also need an [Arduino One](https://store.arduino.cc/usa/arduino-uno-rev3) Board to load the **read_write.ino** located in the utpwallet_arduino folder from the [repo](https://github.com/mastro32/utpwallet_arduino), we suggest you first to clone both repo locally before starting to run the application.
 
 ## Screenshots
 ![Login](Screenshots/Login.png)
