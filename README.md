@@ -1,6 +1,5 @@
 # UtpWallet
 ![UTP Wallet Logo](src/assets/Logo.png)
-Format: ![Logo of the Application](https://github.com/Yaito/utpWalletFE)
 A web based application dedicated for the Technological University of Panama internals credencials and transacctions.
 
 ## Setup
