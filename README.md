@@ -43,5 +43,5 @@ Go to your prefered browser (I personally prefer Chrome), then navigate to `http
 * **Luis Yao** - Front-end Developer - [LinkedIn](https://www.linkedin.com/in/luisyaoyang/)
 * **Roderick Mastrolinardo** - Back-end Develper - [Twitter](https://twitter.com/RodMastro)
 
-## Acknoledgement
+## Acknowledgement
 * **Omar Mejía** - Fullstack Developer - [LinkedIn](https://www.linkedin.com/in/omar-mejia-35940a161/)
